@@ -16,7 +16,7 @@ Hosts the FastMCP ``DomainServer`` base class, the per-domain
 ``HttpClient``), the legacy ``BridgeConfig`` token+port loader, and the
 RFC 7807 error type hierarchy.
 
-Introduced in Plan 3 Task 0 (Phase 2 Stream A â€” v2 Python â†’ FastMCP
+Introduced in Plan 3 Task 0 (Phase 2 Stream A — v2 Python → FastMCP
 migration). v2 tools and ``server.py`` import infrastructure from here;
 the v1 plugin (Plan 4 Stream B) will do the same.
 """

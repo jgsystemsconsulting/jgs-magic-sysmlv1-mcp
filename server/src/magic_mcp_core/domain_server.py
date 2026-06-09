@@ -1,7 +1,7 @@
 # Copyright (c) 2026 JG Systems Consulting Ltd. All Rights Reserved.
 """FastMCP base class for per-domain Cameo MCP servers.
 
-Introduced for Plan 3 (Phase 2 Stream A â€” v2 Python â†’ FastMCP migration).
+Introduced for Plan 3 (Phase 2 Stream A — v2 Python → FastMCP migration).
 ``DomainServer`` is a thin wrapper that owns the ``FastMCP`` instance, the
 :class:`DomainConfig`, and a placeholder for the domain-specific HTTP client.
 Per-domain subclasses (or composition wrappers) register tools via the
@@ -25,7 +25,7 @@ class DomainServer:
     subclasses register their tools via ``@self.mcp.tool()`` on the
     ``self.mcp`` attribute.
 
-    The HTTP client is intentionally *not* constructed here â€” different
+    The HTTP client is intentionally *not* constructed here — different
     domains use different client signatures. The v2 plugin uses
     :class:`magic_mcp_core.BridgeHttpClient` (loaded from
     :class:`BridgeConfig`); future domains may use a generic
@@ -58,7 +58,7 @@ class DomainServer:
     def run_stdio(self) -> None:
         """Run the server over stdio (the standard MCP transport).
 
-        Uses FastMCP's built-in stdio transport â€” no manual ``stdio_server``
+        Uses FastMCP's built-in stdio transport — no manual ``stdio_server``
         wrapping needed.
         """
         self.mcp.run()

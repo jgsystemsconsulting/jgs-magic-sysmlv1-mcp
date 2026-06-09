@@ -2,12 +2,12 @@
 """Configuration loading for Cameo MCP per-domain servers.
 
 Hosts:
-* :class:`BridgeConfig` â€” the v2 plugin's existing token+port loader (unchanged
+* :class:`BridgeConfig` — the v2 plugin's existing token+port loader (unchanged
   behavior; reads the shared token and bound port from files written by the
   Java plugin, plus the optional ``JGS_V2_WRITE_SECRET`` env var).
-* :class:`DomainConfig` â€” generic per-domain configuration consumed by
+* :class:`DomainConfig` — generic per-domain configuration consumed by
   :class:`magic_mcp_core.DomainServer`. Future per-domain plugins (v1, UAF,
-  â€¦) construct one of these from their own env-var prefix.
+  …) construct one of these from their own env-var prefix.
 """
 from __future__ import annotations
 
@@ -120,7 +120,7 @@ class DomainConfig:
     MSOSA restarts (which rotate the token) don't require restarting the MCP process."""
 
     domain_id: str
-    """Stable identifier for this domain (``'sysmlv2'``, ``'sysmlv1'``, ``'uaf'``, â€¦)."""
+    """Stable identifier for this domain (``'sysmlv2'``, ``'sysmlv1'``, ``'uaf'``, …)."""
 
     @classmethod
     def from_env(cls, *, prefix: str, mcp_name: str, domain_id: str) -> "DomainConfig":
