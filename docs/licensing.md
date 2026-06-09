@@ -2,15 +2,15 @@
 Copyright (c) 2026 JG Systems Consulting Ltd. All Rights Reserved.
 -->
 
-# JGS SysML v1 MCP Bridge â€” Licensing
+# JGS SysML v1 MCP Bridge — Licensing
 
 ## Licence Tiers
 
 | Tier | Plugin JAR | Read tools | Write tools | Execute Groovy | Delete |
 |---|---|---|---|---|---|
-| **Free** | jgs-magic-sysmlv1.jar only | âœ“ | â€” | â€” | â€” |
-| **Pro** | + jgs-pro/jgs-sysmlv1-pro.jar | âœ“ | âœ“ | â€” | â€” |
-| **Enterprise** | + jgs-pro/jgs-sysmlv1-pro.jar | âœ“ | âœ“ | âœ“ | âœ“ |
+| **Free** | jgs-magic-sysmlv1.jar only | ✓ | — | — | — |
+| **Pro** | + jgs-pro/jgs-sysmlv1-pro.jar | ✓ | ✓ | — | — |
+| **Enterprise** | + jgs-pro/jgs-sysmlv1-pro.jar | ✓ | ✓ | ✓ | ✓ |
 
 ## Licence File Placement
 

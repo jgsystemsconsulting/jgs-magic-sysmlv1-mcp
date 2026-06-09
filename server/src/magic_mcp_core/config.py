@@ -221,3 +221,58 @@ class DomainConfig:
             bearer_token_path=bearer_token_path,
             domain_id="sysmlv1",
         )
+
+    @classmethod
+    def from_env_dsl(cls) -> "DomainConfig":
+        """Load DSL bridge configuration with file-based port/token discovery.
+
+        Resolution order for ``endpoint``:
+        1. ``JGS_DSL_ENDPOINT`` env var (explicit override).
+        2. Port file written by the Java plugin at
+           ``%LOCALAPPDATA%/.magic.systems.of.systems.architect/2026x/jgs-magic-dsl-bridge.port``.
+        3. Fallback ``http://127.0.0.1:18761`` (BARE — no ``/v1`` suffix; HttpClient
+           appends ``/v1`` internally).
+
+        Resolution order for ``write_token``:
+        1. ``JGS_DSL_WRITE_SECRET`` env var.
+        2. ``None`` (read-only mode).
+
+        Resolution order for ``bearer_token``:
+        1. ``JGS_DSL_TOKEN`` env var.
+        2. Token file at ``jgs-magic-dsl-bridge.token``.
+        3. Falls back to ``write_token``.
+        """
+        endpoint = os.environ.get("JGS_DSL_ENDPOINT")
+        if not endpoint:
+            port_path = (
+                _local_appdata()
+                / ".magic.systems.of.systems.architect"
+                / "2026x"
+                / "jgs-magic-dsl-bridge.port"
+            )
+            if port_path.exists():
+                try:
+                    port = int(port_path.read_text(encoding="utf-8").strip())
+                    endpoint = f"http://127.0.0.1:{port}"
+                except (ValueError, OSError):
+                    endpoint = None
+            if not endpoint:
+                endpoint = "http://127.0.0.1:18761"
+
+        write_token = os.environ.get("JGS_DSL_WRITE_SECRET") or None
+        bearer_token = os.environ.get("JGS_DSL_TOKEN") or None
+
+        base_dir = (
+            _local_appdata() / ".magic.systems.of.systems.architect" / "2026x"
+        )
+        token_file = base_dir / "jgs-magic-dsl-bridge.token"
+        bearer_token_path: Optional[Path] = token_file if token_file.exists() else None
+
+        return cls(
+            mcp_name="jgs-magic-dsl",
+            endpoint=endpoint,
+            write_token=write_token,
+            bearer_token=bearer_token,
+            bearer_token_path=bearer_token_path,
+            domain_id="dsl",
+        )

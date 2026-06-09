@@ -39,10 +39,21 @@ class PluginNotRunningError(BridgeError):
 
 
 _TYPE_MAP: dict[str, type[BridgeError]] = {
+    # v2 bridge error types
     "https://jgs-sysmlv2-mcp/errors/unauthorized": UnauthorizedError,
     "https://jgs-sysmlv2-mcp/errors/not-found": NotFoundError,
     "https://jgs-sysmlv2-mcp/errors/tier-denied": TierDeniedError,
     "https://jgs-sysmlv2-mcp/errors/plugin-not-running": PluginNotRunningError,
+    # v1 bridge error types
+    "https://jgsc-sysmlv1-mcp/errors/unauthorized": UnauthorizedError,
+    "https://jgsc-sysmlv1-mcp/errors/not-found": NotFoundError,
+    "https://jgsc-sysmlv1-mcp/errors/tier-denied": TierDeniedError,
+    "https://jgsc-sysmlv1-mcp/errors/plugin-not-running": PluginNotRunningError,
+    # DSL bridge error types
+    "https://jgs-magic-dsl-mcp/errors/unauthorized": UnauthorizedError,
+    "https://jgs-magic-dsl-mcp/errors/not-found": NotFoundError,
+    "https://jgs-magic-dsl-mcp/errors/tier-denied": TierDeniedError,
+    "https://jgs-magic-dsl-mcp/errors/plugin-not-running": PluginNotRunningError,
 }
 
 
