@@ -1,0 +1,21 @@
+target-version = "py311"
+line-length = 120
+
+[lint]
+select = [
+    "E",     # pycodestyle errors
+    "W",     # pycodestyle warnings
+    "F",     # pyflakes
+    "I",     # isort
+    "UP",    # pyupgrade
+    "B",     # flake8-bugbear
+    "SIM",   # flake8-simplify
+]
+ignore = [
+    "E501",  # line too long (handled by formatter)
+    "F401",  # unused imports (many are intentional re-exports; clean up separately)
+    "E402",  # module-level import not at top (deferred imports by design)
+]
+
+[lint.isort]
+known-first-party = ["jgs_sysmlv2_mcp"]

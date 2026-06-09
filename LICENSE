@@ -1,0 +1,159 @@
+JG Systems Consulting Ltd. — Proprietary Software Licence
+
+Copyright (c) 2026 JG Systems Consulting Ltd. All Rights Reserved.
+
+JG Systems Consulting Ltd. is a company incorporated in England and Wales,
+registered office: Brookfield Court, Selby Road, Garforth, Leeds, England,
+LS25 1NB ("Licensor", "we", "us").
+
+This software, together with its source code, object code, plugins, MCP
+servers, skills, templates, scripts, and accompanying documentation (the
+"Software"), is the proprietary and confidential property of the Licensor.
+By downloading, installing, copying, accessing, or otherwise using the
+Software, you ("Licensee", "you") agree to be bound by the terms of this
+Licence. If you do not agree, do not install or use the Software.
+
+--------------------------------------------------------------------------
+1. DEFINITIONS
+--------------------------------------------------------------------------
+   "Licence Key" means a valid, signed licence file or key issued by the
+   Licensor that activates a paid tier.
+   "Tier" means the level of functionality enabled for you: Free,
+   Professional, or Enterprise.
+   "Documentation" means the user-facing guides, READMEs, and reference
+   material distributed with the Software.
+
+--------------------------------------------------------------------------
+2. GRANT OF LICENCE
+--------------------------------------------------------------------------
+   Subject to your compliance with this Licence, the Licensor grants you a
+   personal, non-exclusive, non-transferable, non-sublicensable, revocable
+   licence to install and use the Software in object form for your internal
+   business or personal purposes, limited to the functionality of the Tier
+   applicable to you. Where the Software is distributed in source-available
+   form, the right to view source code is granted for evaluation and
+   interoperability only and does not grant any right to copy, modify, or
+   redistribute it except as expressly permitted in Section 3.
+
+--------------------------------------------------------------------------
+3. FREE TIER
+--------------------------------------------------------------------------
+   The Free Tier may be used without a Licence Key and enables the subset of
+   functionality designated by the Licensor as free (which may include
+   read-oriented model operations and the publicly distributed skills and
+   template packs). For distributed skill, template, and configuration files
+   that are intended to be installed locally to function, you are granted a
+   limited right to copy those files onto systems you control solely to use
+   the Software as intended. All other terms of this Licence apply to the
+   Free Tier. The Licensor may change the scope of the Free Tier at any time.
+
+--------------------------------------------------------------------------
+4. RESTRICTIONS
+--------------------------------------------------------------------------
+   Except as expressly permitted in Section 3 or by mandatory applicable law,
+   you may not:
+   (a) copy, reproduce, modify, adapt, translate, or create derivative works
+       of the Software or any portion of it;
+   (b) distribute, publish, sell, rent, lease, lend, sublicense, host as a
+       service, or otherwise make the Software available to any third party;
+   (c) reverse engineer, decompile, or disassemble the Software, or attempt
+       to derive its source code, save to the extent this restriction is
+       prohibited by applicable law;
+   (d) remove, obscure, or alter any copyright, trademark, licence, or other
+       proprietary notice;
+   (e) circumvent, disable, or tamper with any Licence Key, tier enforcement,
+       or other technical protection measure;
+   (f) use the Software to develop, train, or operate a product or service
+       that competes with the Software.
+
+--------------------------------------------------------------------------
+5. INTELLECTUAL PROPERTY
+--------------------------------------------------------------------------
+   The Software is licensed, not sold. The Licensor and its licensors retain
+   all right, title, and interest in and to the Software, including all
+   intellectual property rights. No rights are granted other than those
+   expressly set out in this Licence. "JG Systems Consulting" is a trademark
+   of the Licensor. "Cameo", "MagicDraw", and "No Magic" are trademarks of
+   Dassault Systemes; "SysML" is a trademark of the Object Management Group.
+
+--------------------------------------------------------------------------
+6. CONFIDENTIALITY
+--------------------------------------------------------------------------
+   The Software, its non-public source code, and any Licence Keys constitute
+   the confidential information of the Licensor. You shall not disclose them
+   to any third party and shall protect them with at least the same care you
+   use for your own confidential information of like importance.
+
+--------------------------------------------------------------------------
+7. DISCLAIMER OF WARRANTY
+--------------------------------------------------------------------------
+   THE SOFTWARE IS PROVIDED "AS IS" AND "AS AVAILABLE", WITHOUT WARRANTY OF
+   ANY KIND, WHETHER EXPRESS, IMPLIED, OR STATUTORY, INCLUDING WITHOUT
+   LIMITATION THE IMPLIED WARRANTIES OR TERMS OF SATISFACTORY QUALITY,
+   MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, AND NON-INFRINGEMENT,
+   TO THE FULLEST EXTENT PERMITTED BY LAW. The Software is not certified for
+   use in safety-critical environments; you are responsible for validating
+   its outputs.
+
+--------------------------------------------------------------------------
+8. LIMITATION OF LIABILITY
+--------------------------------------------------------------------------
+   Nothing in this Licence excludes or limits the Licensor's liability for
+   (i) death or personal injury caused by negligence, (ii) fraud or
+   fraudulent misrepresentation, or (iii) any other liability that cannot be
+   excluded or limited under the laws of England and Wales.
+
+   Subject to the foregoing, in no event shall the Licensor be liable for any
+   indirect, incidental, special, consequential, or punitive damages, or for
+   any loss of profits, revenue, data, or goodwill, arising out of or in
+   connection with the Software or this Licence. The Licensor's total
+   aggregate liability arising out of or in connection with this Licence
+   shall not exceed the greater of (a) the fees paid by you for the Software
+   in the twelve (12) months preceding the event giving rise to the claim, or
+   (b) one hundred pounds sterling (GBP 100). For Free Tier use where no fees
+   have been paid, the cap in (b) applies.
+
+--------------------------------------------------------------------------
+9. TERM AND TERMINATION
+--------------------------------------------------------------------------
+   This Licence is effective until terminated. It terminates automatically,
+   without notice, if you breach any term. The Licensor may also terminate a
+   paid Tier in accordance with the applicable order or subscription terms.
+   On termination you must cease all use of the Software and destroy all
+   copies in your possession or control. Sections 4 to 11 survive termination.
+
+--------------------------------------------------------------------------
+10. GOVERNING LAW AND JURISDICTION
+--------------------------------------------------------------------------
+   This Licence and any dispute or claim arising out of or in connection with
+   it or its subject matter (including non-contractual disputes or claims) are
+   governed by the laws of England and Wales. The courts of England and Wales
+   shall have exclusive jurisdiction to settle any such dispute or claim.
+
+--------------------------------------------------------------------------
+11. GENERAL
+--------------------------------------------------------------------------
+   (a) Entire agreement. This Licence (together with any applicable order or
+       subscription terms for a paid Tier) is the entire agreement between the
+       parties regarding the Software and supersedes all prior arrangements.
+   (b) Severability. If any provision is held unenforceable, the remaining
+       provisions continue in full force.
+   (c) No waiver. A failure to enforce any provision is not a waiver of it.
+   (d) Assignment. You may not assign or transfer this Licence without the
+       Licensor's prior written consent; the Licensor may assign it freely.
+   (e) Public repositories. Where the Software is published in a public source
+       repository, any platform-level rights granted to other users of that
+       platform (for example, to view or fork a public repository) are
+       limited to that platform's terms and do not grant you or any third
+       party any rights in the Software beyond those expressly set out in this
+       Licence.
+
+--------------------------------------------------------------------------
+12. CONTACT
+--------------------------------------------------------------------------
+   JG Systems Consulting Ltd., a company incorporated in England and Wales.
+   Registered office: Brookfield Court, Selby Road, Garforth, Leeds,
+   England, LS25 1NB.
+   Licensing & support enquiries: support@jgsystemsconsulting.com
+
+SPDX-License-Identifier: LicenseRef-JGSystemsConsulting-Proprietary

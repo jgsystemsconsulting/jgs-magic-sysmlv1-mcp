@@ -1,0 +1,95 @@
+JG Systems Consulting Ltd. - Third-Party Notices
+Copyright (c) 2026 JG Systems Consulting Ltd. All Rights Reserved.
+
+This product is licensed under the JG Systems Consulting Ltd.
+Proprietary Software Licence (see LICENSE).
+
+This product includes, depends on, or interoperates with third-party
+components. The following notices are provided in compliance with the
+licence terms of those components. Nothing in this file grants any
+rights in or to the proprietary portions of this Software.
+
+====================================================================
+TRADEMARK NOTICE
+====================================================================
+
+"JG Systems Consulting" is a trademark of JG Systems Consulting Ltd.
+
+"Cameo", "Cameo Systems Modeler", "MagicDraw", "No Magic", and related
+marks are trademarks or registered trademarks of Dassault Systèmes or
+its affiliates. This software is not developed, endorsed, or
+sponsored by Dassault Systèmes.
+
+"SysML" and "SysML v2" are trademarks of the Object Management Group,
+Inc. (OMG).
+
+"Java" is a trademark of Oracle and/or its affiliates.
+
+"Python" is a trademark of the Python Software Foundation.
+
+All other trademarks are the property of their respective owners and
+are used here for identification purposes only.
+
+====================================================================
+THIRD-PARTY COMPONENTS — PLUGIN (JAVA / GROOVY)
+====================================================================
+
+1. CATIA Magic / Cameo Systems Modeler SDK
+   Copyright Dassault Systèmes.
+   Proprietary. Used under a separate commercial agreement between the
+   Licensee and Dassault Systèmes. Not redistributed with this
+   Software. The Licensee must hold a valid Cameo Systems Modeler
+   licence to run this plugin.
+
+2. Apache Groovy
+   Copyright the Apache Software Foundation.
+   Licensed under the Apache License, Version 2.0.
+   https://www.apache.org/licenses/LICENSE-2.0
+
+3. OpenJDK / Java Standard Library
+   Licensed under the GPLv2 with Classpath Exception (OpenJDK) or
+   equivalent Oracle Binary Code License.
+
+====================================================================
+THIRD-PARTY COMPONENTS — SERVER & LICENSING TOOLING (PYTHON)
+====================================================================
+
+1. cryptography (PyPI)
+   Copyright the cryptography developers.
+   Dual-licensed under Apache License 2.0 and BSD.
+   https://github.com/pyca/cryptography
+
+2. Model Context Protocol (MCP) Python SDK
+   Copyright Anthropic, PBC and MCP contributors.
+   Licensed under the MIT License.
+   https://github.com/modelcontextprotocol/python-sdk
+
+3. httpx, pytest, ruff, and other Python dependencies
+   Each governed by its own licence as declared in the relevant
+   distribution metadata. Consult the installed package metadata
+   (`pip show <package>`) for authoritative licence text.
+
+4. Python Standard Library
+   Copyright Python Software Foundation.
+   Licensed under the Python Software Foundation License.
+
+====================================================================
+REFERENCE STANDARDS AND SPECIFICATIONS
+====================================================================
+
+This software implements or references publicly published
+specifications, including but not limited to:
+
+- OMG Systems Modeling Language (SysML) v2, published by the Object
+  Management Group.
+- Model Context Protocol specification, published by Anthropic, PBC.
+
+Implementation of a specification does not imply endorsement by, or
+affiliation with, the specification's publisher.
+
+====================================================================
+CONTACT
+====================================================================
+
+Questions regarding this NOTICE or third-party attributions should be
+directed to JG Systems Consulting Ltd. at its registered office.

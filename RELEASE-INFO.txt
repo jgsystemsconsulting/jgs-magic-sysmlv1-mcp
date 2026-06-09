@@ -1,0 +1,4 @@
+product=jgs-magic-sysmlv1-mcp
+version=0.1.0
+built_at=2026-06-09T11:52:19Z
+git_sha=90b17ec4

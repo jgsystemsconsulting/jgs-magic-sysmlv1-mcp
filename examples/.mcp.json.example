@@ -1,0 +1,11 @@
+{
+  "mcpServers": {
+    "jgs-sysmlv1": {
+      "command": "python",
+      "args": ["-m", "jgsc_sysmlv1_mcp"],
+      "env": {
+        "JGS_V1_WRITE_SECRET": "YOUR_WRITE_SECRET_HERE"
+      }
+    }
+  }
+}

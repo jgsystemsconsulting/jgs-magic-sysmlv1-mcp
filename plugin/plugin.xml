@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<plugin id="com.jgsc.magicmcp.sysmlv1"
+        name="JGS SysML v1 MCP Bridge"
+        version="0.1.0"
+        provider-name="JG Systems Consulting Ltd."
+        class="com.jgsc.magicmcp.sysmlv1.JgsSysmlV1BridgePlugin">
+    <requires>
+        <api version="1.0"/>
+    </requires>
+    <runtime>
+        <library name="jgs-magic-sysmlv1.jar"/>
+    </runtime>
+</plugin>
+
