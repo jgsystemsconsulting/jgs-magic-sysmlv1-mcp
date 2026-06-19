@@ -15,7 +15,7 @@ few desktop steps it cannot do for you.
 ```text
 You are installing jgs-magic-sysmlv1-mcp, a proprietary MCP bridge (JG Systems Consulting
 Ltd.) that lets MCP clients work with live SysML v1 models in CATIA Magic Systems of
-Systems Architect (MSoSA 2026x). Repository: https://github.com/jgsystemsconsulting/jgs-magic-sysmlv1-mcp (version 0.1.0).
+Systems Architect (MSoSA 2026x). Repository: https://github.com/jgsystemsconsulting/jgs-magic-sysmlv1-mcp (version 0.1.1).
 Do this in order:
 
 1. Read README.md, docs/install.md, docs/configuration.md, and docs/licensing.md in

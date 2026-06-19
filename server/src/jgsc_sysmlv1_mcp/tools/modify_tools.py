@@ -83,3 +83,8 @@ def register_modify_v1_tools(server: DomainServer) -> None:
     async def set_flow_direction(element_id: str, direction: str) -> dict[str, Any]:
         """Set the direction of a Parameter. Valid values: IN, OUT, INOUT, RETURN."""
         return await server.client.set_flow_direction(element_id, direction)
+
+    @server.mcp.tool()
+    async def set_aggregation(feature_id: str, kind: str = "composite") -> dict[str, Any]:
+        """Set a Property's UML aggregation: composite (part), shared, or none (reference)."""
+        return await server.client.set_aggregation(feature_id, kind)

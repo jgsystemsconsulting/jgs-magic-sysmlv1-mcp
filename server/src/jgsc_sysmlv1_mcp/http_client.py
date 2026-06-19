@@ -395,7 +395,10 @@ class HttpClient:
         return await self._run_template("move_element", element_id=element_id, new_parent_id=new_parent_id)
 
     async def set_constraint(self, parent_id: str, expression: str, name: str = "", language: str = "", subject_ids: list[str] | None = None) -> dict[str, Any]:
-        return await self._run_template("set_constraint", parent_id=parent_id, expression=expression, name=name, language=language, subject_ids=subject_ids or [])
+        # Engine ParamSpec only allows scalar types; pass list as comma-joined string
+        # (same pattern as create_enumeration). The Groovy template splits on ',' and trims.
+        subject_ids_str = ",".join(subject_ids) if subject_ids else ""
+        return await self._run_template("set_constraint", parent_id=parent_id, expression=expression, name=name, language=language, subject_ids=subject_ids_str)
 
     async def set_property(self, element_id: str, property_name: str, value: object) -> dict[str, Any]:
         return await self._run_template("set_property", element_id=element_id, property_name=property_name, value=value)
@@ -417,6 +420,9 @@ class HttpClient:
 
     async def set_flow_direction(self, element_id: str, direction: str) -> dict[str, Any]:
         return await self._run_template("set_flow_direction", element_id=element_id, direction=direction)
+
+    async def set_aggregation(self, feature_id: str, kind: str = "composite") -> dict[str, Any]:
+        return await self._run_template("set_aggregation", feature_id=feature_id, kind=kind)
 
     # -----------------------------------------------------------------
     # Relationship operations — all Groovy-backed via _run_template
@@ -505,14 +511,18 @@ class HttpClient:
     async def validate_model(self) -> dict[str, Any]:
         return await self._run_template("validate_model")
 
-    async def check_requirement_coverage(self) -> dict[str, Any]:
-        return await self._run_template("check_requirement_coverage")
+    async def check_requirement_coverage(self, scope: str = "authored") -> dict[str, Any]:
+        return await self._run_template("check_requirement_coverage", scope=scope)
 
-    async def check_documentation_coverage(self) -> dict[str, Any]:
-        return await self._run_template("check_documentation_coverage")
+    async def check_documentation_coverage(self, scope: str = "authored") -> dict[str, Any]:
+        return await self._run_template("check_documentation_coverage", scope=scope)
 
-    async def check_naming_conventions(self) -> dict[str, Any]:
-        return await self._run_template("check_naming_conventions")
+    async def check_naming_conventions(
+        self, scope: str = "authored", allowed_patterns: str = ""
+    ) -> dict[str, Any]:
+        return await self._run_template(
+            "check_naming_conventions", scope=scope, allowed_patterns=allowed_patterns
+        )
 
     async def find_unused_types(self) -> dict[str, Any]:
         return await self._run_template("find_unused_types")
