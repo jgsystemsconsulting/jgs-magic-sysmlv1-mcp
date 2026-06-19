@@ -8,16 +8,35 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>JGS SysML v1 MCP Bridge — AI access to live SysML v1 models in CATIA Magic</title>
-<meta name="description" content="A proprietary MCP bridge that exposes live SysML v1 models in CATIA Magic to AI agents. ~115 MCP tools, air-gapped, FREE / PRO / ENTERPRISE tiers.">
+<title>SysML v1 MCP Bridge for CATIA Magic — AI model access | JGS</title>
+<meta name="description" content="Give Claude Code and any MCP agent live, air-gapped access to your SysML v1 models in CATIA Magic — query, audit, and edit them in plain English. No cloud, no model export.">
+<meta name="keywords" content="SysML, MBSE, model-based systems engineering, CATIA Magic, Cameo Systems Modeler, MSOSA, MCP, Model Context Protocol, Claude Code, AI systems engineering, SysML v1, requirements traceability">
+<meta name="robots" content="index, follow">
+<meta name="author" content="JG Systems Consulting Ltd.">
 <link rel="canonical" href="https://jgsystemsconsulting.github.io/jgs-magic-sysmlv1-mcp/">
 <meta property="og:type" content="website">
-<meta property="og:title" content="JGS SysML v1 MCP Bridge">
-<meta property="og:description" content="AI-to-CATIA Magic bridge for live SysML v1 models. ~115 MCP tools over a local connection — no cloud, no data export.">
+<meta property="og:site_name" content="JGS CATIA Magic MCP">
+<meta property="og:title" content="SysML v1 MCP Bridge for CATIA Magic — AI model access">
+<meta property="og:description" content="The AI comes to your model. Live, air-gapped SysML v1 access for Claude Code and any MCP agent — no cloud, no export.">
 <meta property="og:url" content="https://jgsystemsconsulting.github.io/jgs-magic-sysmlv1-mcp/">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="JGS SysML v1 MCP Bridge">
-<meta name="twitter:description" content="AI-to-CATIA Magic bridge for live SysML v1 models. ~115 MCP tools, air-gapped.">
+<meta name="twitter:title" content="SysML v1 MCP Bridge for CATIA Magic">
+<meta name="twitter:description" content="Live, air-gapped AI access to SysML v1 models in CATIA Magic. ~115 tools. No cloud, no export.">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "JGS SysML v1 MCP Bridge",
+  "applicationCategory": "DeveloperApplication",
+  "applicationSubCategory": "Model-Based Systems Engineering",
+  "operatingSystem": "Windows, macOS, Linux",
+  "softwareVersion": "0.1.1",
+  "url": "https://jgsystemsconsulting.github.io/jgs-magic-sysmlv1-mcp/",
+  "description": "An MCP bridge that exposes live SysML v1 models in CATIA Magic to AI agents over a local, air-gapped connection.",
+  "author": { "@type": "Organization", "name": "JG Systems Consulting Ltd." },
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD", "description": "FREE tier — read-only model access, no licence file required" }
+}
+</script>
 <style>
 @font-face { font-family: 'Inter'; font-style: normal; font-weight: 400; font-display: swap; src: url('fonts/inter-400.woff2') format('woff2'); }
 @font-face { font-family: 'Inter'; font-style: normal; font-weight: 600; font-display: swap; src: url('fonts/inter-600.woff2') format('woff2'); }
@@ -36,7 +55,7 @@
 }
 
 * { box-sizing: border-box; }
-html { -webkit-text-size-adjust: 100%; }
+html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
 body {
   margin: 0; background: var(--ink); color: var(--mute-2);
   font-family: var(--sans); font-size: 16px; line-height: 1.7;
@@ -67,11 +86,12 @@ code, .mono { font-family: var(--mono); }
 /* Section scaffolding */
 section { padding: var(--pad-section) 0; border-bottom: 1px solid var(--line); }
 .sec-label { margin: 0 0 24px; }
+.lead-in { color: var(--text); max-width: 64ch; }
 
 /* Hero */
 .hero h1 { font-size: clamp(2rem, 5vw, 3.25rem); margin: 0 0 20px; line-height: 1.08; }
 .hero p.lede { font-size: clamp(1.05rem, 2vw, 1.25rem); color: var(--text); max-width: 60ch; margin: 0 0 32px; }
-.btns { display: flex; flex-wrap: wrap; gap: 14px; }
+.btns { display: flex; flex-wrap: wrap; gap: 14px; align-items: center; }
 .btn {
   font-family: var(--mono); font-weight: 700; font-size: 0.8125rem; letter-spacing: 0.06em;
   text-transform: uppercase; text-decoration: none; padding: 13px 22px; display: inline-flex; gap: 10px;
@@ -104,11 +124,16 @@ pre {
 }
 pre .c { color: var(--mute); }
 
+/* CTA panel — drafting-sheet motif (token-based, brand-consistent) */
+.cta { background: var(--ink-2); border: 1px solid var(--line); padding: clamp(28px, 4vw, 44px); }
+.cta h2 { margin: 0 0 10px; font-size: clamp(1.4rem, 3vw, 1.9rem); }
+.cta p { color: var(--text); max-width: 58ch; margin: 0 0 24px; }
+
 footer { padding: 40px 0 64px; }
 footer p { font-size: 0.85rem; color: var(--mute); }
 
 :focus-visible { outline: 2px solid var(--paper); outline-offset: 2px; }
-@media (prefers-reduced-motion: reduce) { * { transition: none !important; } .btn:hover { transform: none; } }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } * { transition: none !important; } .btn:hover { transform: none; } }
 @media (max-width: 860px) {
   .grid.cols-2, .grid.cols-3 { grid-template-columns: 1fr; }
   .masthead .row .spacer { display: none; }
@@ -132,60 +157,99 @@ footer p { font-size: 0.85rem; color: var(--mute); }
 
   <section class="hero">
     <p class="label">JG Systems Consulting Ltd. · CATIA Magic MCP</p>
-    <h1>JGS SysML v1 MCP Bridge</h1>
+    <h1>Let your AI work on the SysML model it could never reach.</h1>
     <p class="lede">
-      An AI-to-CATIA Magic bridge for SysML v1 models. It exposes your live SysML v1 project to
-      Claude Code and any MCP agent over a local connection — roughly 115 model tools, with
-      v1-native vocabulary. Air-gapped by design: the model stays inside CATIA Magic, with no
-      cloud and no data export.
+      Your SysML v1 model lives inside CATIA Magic — and your AI assistant can't touch it. You
+      can't paste a 100,000-element model into a chat window, and you certainly can't send a
+      proprietary system design to the cloud. <strong>The JGS bridge brings the AI to the
+      model instead:</strong> it exposes your live project to Claude Code or any MCP agent over a
+      local, air-gapped connection — ~115 tools to query, audit, and edit the real model in plain
+      English. Nothing leaves your machine.
     </p>
     <div class="btns">
-      <a class="btn primary" href="#install">Install →</a>
+      <a class="btn primary" href="#install">Start free →</a>
       <a class="btn ghost" href="https://github.com/jgsystemsconsulting/jgs-magic-sysmlv1-mcp">View on GitHub →</a>
     </div>
   </section>
 
   <section>
-    <p class="label sec-label">§01 — What it is</p>
-    <div class="grid cols-3">
-      <div class="cell"><h3>The model comes to the AI</h3><p>A Java plugin inside CATIA Magic exposes SysML v1 operations as MCP tools over a local HTTP connection — read, query, and (with PRO) write.</p></div>
-      <div class="cell"><h3>Air-gapped</h3><p>Binds to 127.0.0.1 only, offline licence validation, no network calls. Your SysML stays in CATIA Magic.</p></div>
-      <div class="cell"><h3>Tiered access</h3><p>Read for free; write with PRO; full scripting at ENTERPRISE. One bridge, gated by your licence.</p></div>
+    <p class="label sec-label">§01 — The problem</p>
+    <p class="lead-in">
+      MBSE models grow into tens of thousands of elements. Navigating them, auditing coverage, and
+      keeping requirements traceable is slow manual work — and the one tool that could help, your AI
+      assistant, is locked out. Two walls stand in the way, and most "AI for engineering" stories
+      ignore both.
+    </p>
+    <div class="grid cols-2" style="margin-top:24px">
+      <div class="cell"><h3>The model is too big to share</h3><p>A real SysML project won't fit in a prompt. Copy-pasting fragments loses the structure that matters — the relationships, allocations, and traceability.</p></div>
+      <div class="cell"><h3>The model is too sensitive to upload</h3><p>System designs are IP, often export-controlled. Sending them to a cloud LLM is a non-starter for defense, aerospace, and regulated programmes.</p></div>
     </div>
   </section>
 
   <section>
-    <p class="label sec-label">§02 — What's included</p>
-    <div class="grid cols-2">
-      <div class="cell"><h3><code>plugin/</code></h3><p>The CATIA Magic plugin JAR — copied into your user plugins directory.</p></div>
-      <div class="cell"><h3><code>server/</code></h3><p>The Python MCP server — <code>pip install ./server</code>.</p></div>
-      <div class="cell"><h3><code>docs/</code></h3><p>Install, configuration, and licensing guides, plus the tool reference.</p></div>
-      <div class="cell"><h3><code>examples/ · tools/</code></h3><p>A ready <code>.mcp.json</code> example and a read-only licence verifier.</p></div>
+    <p class="label sec-label">§02 — How it works</p>
+    <p class="lead-in">
+      A Java plugin runs inside CATIA Magic and exposes the live model as MCP tools over a local
+      HTTP connection. Your agent calls those tools directly — reading and (with a PRO licence)
+      writing the actual model, in its own v1-native vocabulary.
+    </p>
+    <div class="grid cols-3" style="margin-top:24px">
+      <div class="cell"><h3>~115 model tools</h3><p>Find, inspect, navigate, audit, trace requirements, and edit blocks, ports, requirements, and diagrams — the operations engineers actually do.</p></div>
+      <div class="cell"><h3>Plain-English driven</h3><p>Ask your agent in normal language; it maps the request to the right tools and works on the live model, not a stale export.</p></div>
+      <div class="cell"><h3>v1-native</h3><p>Speaks SysML v1 vocabulary throughout — Blocks, IBDs, flow ports, allocations — so results match the model you already have.</p></div>
+    </div>
+  </section>
+
+  <section>
+    <p class="label sec-label">§03 — Why air-gapped matters</p>
+    <p class="lead-in">
+      This is the difference that lets you actually use it at work. The bridge binds to
+      <code>127.0.0.1</code> only, validates its licence offline, and makes no outbound network
+      calls. Your model never leaves the workstation — so the security review is short, and the
+      answer to "where does our IP go?" is "nowhere."
+    </p>
+    <div class="grid cols-3" style="margin-top:24px">
+      <div class="cell"><h3>Local only</h3><p>Loopback connection; no cloud service, no telemetry, no data export.</p></div>
+      <div class="cell"><h3>Offline licence</h3><p>Ed25519 signature checked locally — no licence server to call home to.</p></div>
+      <div class="cell"><h3>Your tools, your rules</h3><p>Runs beside the CATIA Magic you already trust. Nothing new to expose to the network.</p></div>
     </div>
   </section>
 
   <section id="install">
-    <p class="label sec-label">§03 — Install</p>
+    <p class="label sec-label">§04 — Install</p>
     <div class="chain">
-      <div class="step"><span class="num">1</span><div><h3>Install the server</h3><p><code>pip install ./server</code> and create your MCP client config from <code>examples/.mcp.json.example</code> (see <a href="https://github.com/jgsystemsconsulting/jgs-magic-sysmlv1-mcp/blob/main/docs/install.md">docs/install.md</a>).</p></div></div>
-      <div class="step"><span class="num">2</span><div><h3>Place the plugin &amp; restart</h3><p>Copy <code>plugin/</code> into your CATIA Magic user plugins directory and restart MSOSA. This step is done on your desktop app — an agent cannot do it for you.</p></div></div>
-      <div class="step"><span class="num">3</span><div><h3>Verify</h3><p>Call the <code>ping</code> MCP tool. If it answers, the bridge is live. See <a href="https://github.com/jgsystemsconsulting/jgs-magic-sysmlv1-mcp/blob/main/docs/configuration.md">configuration.md</a> if not.</p></div></div>
+      <div class="step"><span class="num">1</span><div><h3>Install the server</h3><p><code>pip install ./server</code>, then create your MCP client config from <code>examples/.mcp.json.example</code> (see <a href="https://github.com/jgsystemsconsulting/jgs-magic-sysmlv1-mcp/blob/main/docs/install.md">docs/install.md</a>).</p></div></div>
+      <div class="step"><span class="num">2</span><div><h3>Place the plugin &amp; restart</h3><p>Copy <code>plugin/</code> into your CATIA Magic user plugins directory and restart MSOSA. This step runs on your desktop app — an agent cannot do it for you.</p></div></div>
+      <div class="step"><span class="num">3</span><div><h3>Verify</h3><p>Call the <code>ping</code> tool. If it answers, the bridge is live. See <a href="https://github.com/jgsystemsconsulting/jgs-magic-sysmlv1-mcp/blob/main/docs/configuration.md">configuration.md</a> if not.</p></div></div>
     </div>
-    <pre><span class="c"># install the server (from the repo root)</span>
-pip install ./server
-
-<span class="c"># then: copy plugin/ into CATIA Magic's plugins dir and restart MSOSA</span>
-<span class="c"># then: call the ping tool to confirm the bridge is reachable</span></pre>
+    <pre><span class="c"># install the server (from the repo root), then place the plugin and restart MSOSA</span>
+pip install ./server</pre>
+    <p style="margin-top:14px; font-size:0.9rem; color:var(--mute);">Prefer your AI agent do it? The <a href="https://github.com/jgsystemsconsulting/jgs-magic-sysmlv1-mcp#install-with-your-ai-agent">README</a> carries a paste-in install prompt.</p>
   </section>
 
   <section>
-    <p class="label sec-label">§04 — Licence tiers</p>
-    <div class="grid cols-3">
-      <div class="cell"><span class="tier">FREE</span><h3>Read</h3><p>Read-only model access. No licence file required.</p></div>
-      <div class="cell"><span class="tier">PRO</span><h3>Write</h3><p>Full write access. Licence file required.</p></div>
-      <div class="cell"><span class="tier">ENTERPRISE</span><h3>Script</h3><p>Write plus dangerous writes and scripting. Licence file required.</p></div>
+    <p class="label sec-label">§05 — Licence tiers</p>
+    <p class="lead-in">Start free with read-only access — no licence file. Upgrade when you want the
+      AI to <em>change</em> the model, not just read it.</p>
+    <div class="grid cols-3" style="margin-top:24px">
+      <div class="cell"><span class="tier">FREE</span><h3>Read &amp; audit</h3><p>Query, navigate, audit, and report on the live model. No licence file required — the fastest way to prove the value.</p></div>
+      <div class="cell"><span class="tier">PRO</span><h3>Author &amp; edit</h3><p>Full write access: create and modify blocks, ports, requirements, relationships, and diagrams through your agent. Licence file required.</p></div>
+      <div class="cell"><span class="tier">ENTERPRISE</span><h3>Script &amp; scale</h3><p>Everything in PRO plus dangerous writes and Groovy scripting for power workflows. Licence file required.</p></div>
     </div>
-    <p style="margin-top:18px; font-size:0.9rem; color:var(--mute);">See <a href="https://github.com/jgsystemsconsulting/jgs-magic-sysmlv1-mcp/blob/main/docs/licensing.md">licensing.md</a>. Pair with the free <a href="https://github.com/jgsystemsconsulting/jgs-magic-sysmlv1-free-skills">jgs-magic-sysmlv1-free-skills</a> pack for guided read-only analysis.</p>
+  </section>
+
+  <section>
+    <div class="cta">
+      <p class="label" style="margin:0 0 12px">Upgrade</p>
+      <h2>Ready to let the AI build, not just browse?</h2>
+      <p>The free tier reads your model. A PRO licence lets your agent author and refactor it —
+        create requirements, wire allocations, fix findings, draft diagrams — at the speed you can
+        describe them. ENTERPRISE adds scripting for repeatable, large-scale changes.</p>
+      <div class="btns">
+        <a class="btn primary" href="mailto:support@jgsystemsconsulting.com?subject=PRO%20licence%20enquiry%20—%20jgs-magic-sysmlv1-mcp">Get a PRO licence →</a>
+        <a class="btn ghost" href="https://github.com/jgsystemsconsulting/jgs-magic-sysmlv1-mcp/blob/main/docs/licensing.md">Compare tiers →</a>
+      </div>
+    </div>
   </section>
 
   <footer>
