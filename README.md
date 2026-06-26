@@ -36,6 +36,19 @@ Do this in order:
    FREE / PRO / ENTERPRISE tiers. Never invent, commit, or share licence keys.
 ```
 
+## Install from the Claude Code marketplace
+
+This repo ships a Claude Code plugin manifest, so you can add it as a marketplace and
+install from inside Claude Code:
+
+```text
+/plugin marketplace add jgsystemsconsulting/jgs-magic-sysmlv1-mcp
+/plugin install jgs-magic-sysmlv1-mcp
+```
+
+The marketplace install registers the bridge; the desktop steps (CATIA Magic plugin JAR
++ restart) still run on your machine — see [docs/install.md](docs/install.md).
+
 ## What's Included
 
 - `plugin/` — CATIA Magic plugin JAR (copy to your plugins directory)
@@ -56,8 +69,9 @@ See [docs/install.md](docs/install.md) for full installation instructions.
 ## Support & Security
 
 - **Support / licensing:** JG Systems Consulting Ltd.
-- **Report a security issue:** contact JG Systems Consulting Ltd. privately;
-  please do not open public issues for vulnerabilities.
+- **Report a security issue:** open a [private security advisory](https://github.com/jgsystemsconsulting/jgs-magic-sysmlv1-mcp/security/advisories/new)
+  on this repository. Please do not open public issues for vulnerabilities, and do not
+  email keys or licence material.
 
 ## Licence
 

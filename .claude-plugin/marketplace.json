@@ -1,0 +1,12 @@
+{
+  "name": "jgs-magic-sysmlv1-mcp",
+  "description": "JG Systems Consulting MCP bridge to live SysML v1 models in CATIA Magic: query, audit, and edit them from Claude Code and any MCP agent over a local, air-gapped connection.",
+  "owner": { "name": "JG Systems Consulting Ltd.", "url": "https://github.com/jgsystemsconsulting/jgs-magic-sysmlv1-mcp" },
+  "plugins": [
+    {
+      "name": "jgs-magic-sysmlv1-mcp",
+      "source": "./",
+      "description": "MCP server + CATIA Magic plugin exposing live SysML v1 models to AI agents (FREE / PRO / ENTERPRISE tiers)."
+    }
+  ]
+}
