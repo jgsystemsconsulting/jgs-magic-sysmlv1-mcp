@@ -8,10 +8,11 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>SysML v1 MCP Bridge for CATIA Magic — AI model access | JGS</title>
+<title>SysML v1 MCP Bridge for CATIA Magic | JG Systems</title>
 <meta name="description" content="Give Claude Code and any MCP agent live, air-gapped access to your SysML v1 models in CATIA Magic — query, audit, and edit them in plain English. No cloud, no model export.">
-<meta name="keywords" content="SysML, MBSE, model-based systems engineering, CATIA Magic, Cameo Systems Modeler, MSOSA, MCP, Model Context Protocol, Claude Code, AI systems engineering, SysML v1, requirements traceability">
 <meta name="robots" content="index, follow">
+<link rel="preload" href="fonts/inter-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/inter-600.woff2" as="font" type="font/woff2" crossorigin>
 <meta name="author" content="JG Systems Consulting Ltd.">
 <link rel="canonical" href="https://jgsystemsconsulting.github.io/jgs-magic-sysmlv1-mcp/">
 <meta property="og:type" content="website">
@@ -34,7 +35,7 @@
   "url": "https://jgsystemsconsulting.github.io/jgs-magic-sysmlv1-mcp/",
   "description": "An MCP bridge that exposes live SysML v1 models in CATIA Magic to AI agents over a local, air-gapped connection.",
   "author": { "@type": "Organization", "name": "JG Systems Consulting Ltd." },
-  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD", "description": "FREE tier — read-only model access, no licence file required" }
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD", "availability": "https://schema.org/OnlineOnly", "url": "https://jgsystemsconsulting.github.io/jgs-magic-sysmlv1-mcp/", "description": "FREE tier — read-only model access, no licence file required" }
 }
 </script>
 <style>
@@ -46,7 +47,7 @@
 :root {
   --ink: #0a0a0b; --ink-2: #111113; --ink-3: #16171a; --ink-4: #1e2024;
   --line: #2a2d33; --line-2: #3a3e46;
-  --mute: #6b7078; --mute-2: #8b9099;
+  --mute: #797f87; --mute-2: #8b9099;
   --text: #c7ccd3; --text-hi: #e8ebf0;
   --paper: #f4f2ec; --paper-ink: #0a0a0b;
   --mono: 'JetBrains Mono', ui-monospace, 'SFMono-Regular', Menlo, Consolas, monospace;
@@ -97,7 +98,7 @@ section { padding: var(--pad-section) 0; border-bottom: 1px solid var(--line); }
   text-transform: uppercase; text-decoration: none; padding: 13px 22px; display: inline-flex; gap: 10px;
 }
 .btn.primary { background: var(--paper); color: var(--paper-ink); }
-.btn.ghost { background: transparent; color: var(--text-hi); border: 1px solid var(--line); }
+.btn.ghost { background: transparent; color: var(--text-hi); border: 1px solid var(--mute); }
 .btn:hover { transform: translateY(-1px); }
 
 /* Grid-of-cells (hairline gaps) */
@@ -113,7 +114,7 @@ section { padding: var(--pad-section) 0; border-bottom: 1px solid var(--line); }
 /* Chain */
 .chain { display: grid; gap: 1px; background: var(--line); border: 1px solid var(--line); }
 .chain .step { background: var(--ink); padding: 22px 24px; display: flex; gap: 22px; align-items: baseline; }
-.chain .num { font-family: var(--mono); font-weight: 700; font-size: 3rem; line-height: 1; color: var(--line-2); min-width: 2ch; }
+.chain .num { font-family: var(--mono); font-weight: 700; font-size: 3rem; line-height: 1; color: var(--mute); min-width: 2ch; }
 .chain .step h3 { margin: 0 0 4px; }
 .chain .step code { color: var(--text-hi); }
 
@@ -133,6 +134,9 @@ footer { padding: 40px 0 64px; }
 footer p { font-size: 0.85rem; color: var(--mute); }
 
 :focus-visible { outline: 2px solid var(--paper); outline-offset: 2px; }
+.skip-link { position: absolute; top: -100%; left: 0; background: var(--paper); color: var(--paper-ink); padding: 8px 16px; font-family: var(--mono); font-size: 0.85rem; z-index: 9999; text-decoration: none; }
+.skip-link:focus { top: 0; }
+/* prefers-color-scheme: light intentionally not implemented — the dark engineering-document aesthetic is brand. */
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } * { transition: none !important; } .btn:hover { transform: none; } }
 @media (max-width: 860px) {
   .grid.cols-2, .grid.cols-3 { grid-template-columns: 1fr; }
@@ -142,6 +146,8 @@ footer p { font-size: 0.85rem; color: var(--mute); }
 </head>
 <body>
 
+<a href="#main-content" class="skip-link">Skip to main content</a>
+
 <header class="masthead">
   <div class="row">
     <span>CLASSIFICATION: <b>PUBLIC</b></span>
@@ -149,11 +155,11 @@ footer p { font-size: 0.85rem; color: var(--mute); }
     <span>DOC-ID: <b>JGS-MCP-V1</b></span>
     <span>REV <b>0.1.1</b></span>
     <span class="spacer"></span>
-    <a href="https://github.com/jgsystemsconsulting/jgs-magic-sysmlv1-mcp">GitHub →</a>
+    <nav aria-label="External links"><a href="https://github.com/jgsystemsconsulting/jgs-magic-sysmlv1-mcp">GitHub →</a></nav>
   </div>
 </header>
 
-<main class="wrap">
+<main class="wrap" id="main-content">
 
   <section class="hero">
     <p class="label">JG Systems Consulting Ltd. · CATIA Magic MCP</p>
@@ -172,13 +178,12 @@ footer p { font-size: 0.85rem; color: var(--mute); }
     </div>
   </section>
 
-  <section>
-    <p class="label sec-label">§01 — The problem</p>
+  <section aria-labelledby="sec-problem">
+    <h2 class="label sec-label" id="sec-problem">§01 — The problem</h2>
     <p class="lead-in">
       MBSE models grow into tens of thousands of elements. Navigating them, auditing coverage, and
       keeping requirements traceable is slow manual work — and the one tool that could help, your AI
-      assistant, is locked out. Two walls stand in the way, and most "AI for engineering" stories
-      ignore both.
+      assistant, is locked out. Two walls stand in the way.
     </p>
     <div class="grid cols-2" style="margin-top:24px">
       <div class="cell"><h3>The model is too big to share</h3><p>A real SysML project won't fit in a prompt. Copy-pasting fragments loses the structure that matters — the relationships, allocations, and traceability.</p></div>
@@ -186,27 +191,26 @@ footer p { font-size: 0.85rem; color: var(--mute); }
     </div>
   </section>
 
-  <section>
-    <p class="label sec-label">§02 — How it works</p>
+  <section aria-labelledby="sec-how">
+    <h2 class="label sec-label" id="sec-how">§02 — How it works</h2>
     <p class="lead-in">
       A Java plugin runs inside CATIA Magic and exposes the live model as MCP tools over a local
       HTTP connection. Your agent calls those tools directly — reading and (with a PRO licence)
       writing the actual model, in its own v1-native vocabulary.
     </p>
     <div class="grid cols-3" style="margin-top:24px">
-      <div class="cell"><h3>~115 model tools</h3><p>Find, inspect, navigate, audit, trace requirements, and edit blocks, ports, requirements, and diagrams — the operations engineers actually do.</p></div>
+      <div class="cell"><h3>~115 model tools</h3><p>Find, inspect, navigate, audit, trace requirements, and edit blocks, ports, requirements, and diagrams.</p></div>
       <div class="cell"><h3>Plain-English driven</h3><p>Ask your agent in normal language; it maps the request to the right tools and works on the live model, not a stale export.</p></div>
       <div class="cell"><h3>v1-native</h3><p>Speaks SysML v1 vocabulary throughout — Blocks, IBDs, flow ports, allocations — so results match the model you already have.</p></div>
     </div>
   </section>
 
-  <section>
-    <p class="label sec-label">§03 — Why air-gapped matters</p>
+  <section aria-labelledby="sec-airgap">
+    <h2 class="label sec-label" id="sec-airgap">§03 — Why air-gapped matters</h2>
     <p class="lead-in">
-      This is the difference that lets you actually use it at work. The bridge binds to
-      <code>127.0.0.1</code> only, validates its licence offline, and makes no outbound network
-      calls. Your model never leaves the workstation — so the security review is short, and the
-      answer to "where does our IP go?" is "nowhere."
+      The bridge binds to <code>127.0.0.1</code> only, validates its licence offline, and makes no
+      outbound network calls. Your model never leaves the workstation, which keeps the security
+      review short.
     </p>
     <div class="grid cols-3" style="margin-top:24px">
       <div class="cell"><h3>Local only</h3><p>Loopback connection; no cloud service, no telemetry, no data export.</p></div>
@@ -215,8 +219,8 @@ footer p { font-size: 0.85rem; color: var(--mute); }
     </div>
   </section>
 
-  <section id="install">
-    <p class="label sec-label">§04 — Install</p>
+  <section id="install" aria-labelledby="sec-install">
+    <h2 class="label sec-label" id="sec-install">§04 — Install</h2>
     <div class="chain">
       <div class="step"><span class="num">1</span><div><h3>Install the server</h3><p><code>pip install ./server</code>, then create your MCP client config from <code>examples/.mcp.json.example</code> (see <a href="https://github.com/jgsystemsconsulting/jgs-magic-sysmlv1-mcp/blob/main/docs/install.md">docs/install.md</a>).</p></div></div>
       <div class="step"><span class="num">2</span><div><h3>Place the plugin &amp; restart</h3><p>Copy <code>plugin/</code> into your CATIA Magic user plugins directory and restart MSOSA. This step runs on your desktop app — an agent cannot do it for you.</p></div></div>
@@ -227,24 +231,24 @@ pip install ./server</pre>
     <p style="margin-top:14px; font-size:0.9rem; color:var(--mute);">Prefer your AI agent do it? The <a href="https://github.com/jgsystemsconsulting/jgs-magic-sysmlv1-mcp#install-with-your-ai-agent">README</a> carries a paste-in install prompt.</p>
   </section>
 
-  <section>
-    <p class="label sec-label">§05 — Licence tiers</p>
+  <section aria-labelledby="sec-tiers">
+    <h2 class="label sec-label" id="sec-tiers">§05 — Licence tiers</h2>
     <p class="lead-in">Start free with read-only access — no licence file. Upgrade when you want the
       AI to <em>change</em> the model, not just read it.</p>
     <div class="grid cols-3" style="margin-top:24px">
-      <div class="cell"><span class="tier">FREE</span><h3>Read &amp; audit</h3><p>Query, navigate, audit, and report on the live model. No licence file required — the fastest way to prove the value.</p></div>
+      <div class="cell"><span class="tier">FREE</span><h3>Read &amp; audit</h3><p>Query, navigate, audit, and report on the live model. No licence file required.</p></div>
       <div class="cell"><span class="tier">PRO</span><h3>Author &amp; edit</h3><p>Full write access: create and modify blocks, ports, requirements, relationships, and diagrams through your agent. Licence file required.</p></div>
       <div class="cell"><span class="tier">ENTERPRISE</span><h3>Script &amp; scale</h3><p>Everything in PRO plus dangerous writes and Groovy scripting for power workflows. Licence file required.</p></div>
     </div>
   </section>
 
-  <section>
+  <section aria-labelledby="sec-upgrade">
     <div class="cta">
       <p class="label" style="margin:0 0 12px">Upgrade</p>
-      <h2>Ready to let the AI build, not just browse?</h2>
+      <h2 id="sec-upgrade">Let the AI write to the model, not just read it.</h2>
       <p>The free tier reads your model. A PRO licence lets your agent author and refactor it —
-        create requirements, wire allocations, fix findings, draft diagrams — at the speed you can
-        describe them. ENTERPRISE adds scripting for repeatable, large-scale changes.</p>
+        create requirements, wire allocations, fix findings, draft diagrams. ENTERPRISE adds
+        scripting for repeatable, large-scale changes.</p>
       <div class="btns">
         <a class="btn primary" href="mailto:support@jgsystemsconsulting.com?subject=PRO%20licence%20enquiry%20—%20jgs-magic-sysmlv1-mcp">Get a PRO licence →</a>
         <a class="btn ghost" href="https://github.com/jgsystemsconsulting/jgs-magic-sysmlv1-mcp/blob/main/docs/licensing.md">Compare tiers →</a>
