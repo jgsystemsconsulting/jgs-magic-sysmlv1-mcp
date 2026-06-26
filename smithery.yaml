@@ -1,0 +1,23 @@
+# Smithery configuration — local stdio MCP server.
+# This is an air-gapped bridge to a SysML v1 model in a locally running CATIA Magic
+# (MSoSA) instance, so it runs on the user's own machine over stdio. It cannot be
+# hosted by Smithery; this manifest describes how to launch it locally after the
+# server package and the CATIA Magic plugin are installed (see docs/install.md).
+startCommand:
+  type: stdio
+  configSchema:
+    type: object
+    properties:
+      writeSecret:
+        type: string
+        title: Write secret
+        description: >-
+          Value of JGS_V1_WRITE_SECRET — enables model-edit tools. Read-only
+          query/audit tools work without it. Obtain from your licence.
+    required: []
+  commandFunction: |-
+    (config) => ({
+      command: 'python',
+      args: ['-m', 'jgsc_sysmlv1_mcp'],
+      env: config.writeSecret ? { JGS_V1_WRITE_SECRET: config.writeSecret } : {}
+    })
