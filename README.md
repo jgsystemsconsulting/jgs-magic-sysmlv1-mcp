@@ -25,14 +25,14 @@ Do this in order:
    (see docs/install.md for the exact command), create my MCP client config from
    `examples/.mcp.json.example` (fill in placeholders; never invent secrets/tokens),
    and place my licence file as described in docs/licensing.md.
-3. STOP — these two steps run on my desktop app and you cannot do them for me:
+3. STOP: these two steps run on my desktop app and you cannot do them for me:
      a. Copy the contents of `plugin/` into my CATIA Magic user plugins directory
         (the exact path is in docs/install.md).
      b. Restart CATIA Magic.
    Tell me the target path and wait for me to confirm I have done both.
 4. After I confirm, verify the bridge by calling the `ping` MCP tool and report the
    result. If it fails, walk me through docs/configuration.md.
-5. This is licensed software — point me at LICENSE and docs/licensing.md and note the
+5. This is licensed software: point me at LICENSE and docs/licensing.md and note the
    FREE / PRO / ENTERPRISE tiers. Never invent, commit, or share licence keys.
 ```
 
@@ -47,15 +47,15 @@ install from inside Claude Code:
 ```
 
 The marketplace install registers the bridge; the desktop steps (CATIA Magic plugin JAR
-+ restart) still run on your machine — see [docs/install.md](docs/install.md).
++ restart) still run on your machine. See [docs/install.md](docs/install.md).
 
 ## What's Included
 
-- `plugin/` — CATIA Magic plugin JAR (copy to your plugins directory)
-- `server/` — Python MCP server (install with `pip install ./server`)
-- `docs/` — Installation guide and configuration reference
-- `tools/` — Licence verification utility
-- `examples/` — Sample `.mcp.json` configuration
+- `plugin/`: CATIA Magic plugin JAR (copy to your plugins directory)
+- `server/`: Python MCP server (install with `pip install ./server`)
+- `docs/`: Installation guide and configuration reference
+- `tools/`: Licence verification utility
+- `examples/`: Sample `.mcp.json` configuration
 
 ## Quick Start
 
@@ -75,7 +75,7 @@ See [docs/install.md](docs/install.md) for full installation instructions.
 
 ## Licence
 
-Proprietary — see [LICENSE](LICENSE) and [docs/licensing.md](docs/licensing.md).
+Proprietary: see [LICENSE](LICENSE) and [docs/licensing.md](docs/licensing.md).
 
 Copyright (c) 2026 JG Systems Consulting Ltd. All Rights Reserved.
 

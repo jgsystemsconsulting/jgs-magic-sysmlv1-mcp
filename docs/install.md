@@ -2,7 +2,7 @@
 Copyright (c) 2026 JG Systems Consulting Ltd. All Rights Reserved.
 -->
 
-# JGS SysML v1 MCP Bridge — Installation Guide
+# JGS SysML v1 MCP Bridge: Installation Guide
 
 ## Prerequisites
 
@@ -30,7 +30,7 @@ com.jgsc.magicmcp.sysmlv1/
 └── jgs-magic-sysmlv1.jar
 ```
 
-The bundled JAR provides all **FREE-tier** functionality. **PRO / ENTERPRISE** tiers use an additional plugin JAR (`jgs-pro/jgs-sysmlv1-pro.jar`) that is **not included** in this distribution — after purchasing, download it from the link supplied with your licence and install it under a `jgs-pro/` subfolder following the instructions included with that download.
+The bundled JAR provides all **FREE-tier** functionality. **PRO / ENTERPRISE** tiers use an additional plugin JAR (`jgs-pro/jgs-sysmlv1-pro.jar`) that is **not included** in this distribution. After purchasing, download it from the link supplied with your licence and install it under a `jgs-pro/` subfolder following the instructions included with that download.
 
 > **Do not restart CATIA Magic yet** if you have a licence file to place (see Step 3).
 
@@ -39,10 +39,10 @@ The bundled JAR provides all **FREE-tier** functionality. **PRO / ENTERPRISE** t
 ```bash
 python -m venv ~/.jgsc-sysmlv1/venv
 
-# Activate — macOS/Linux:
+# Activate (macOS/Linux):
 source ~/.jgsc-sysmlv1/venv/bin/activate
 
-# Activate — Windows PowerShell:
+# Activate (Windows PowerShell):
 ~\.jgsc-sysmlv1\venv\Scripts\Activate.ps1
 
 pip install ./server
@@ -74,7 +74,7 @@ Expected output: `Licence valid: customer=..., tier=..., seats=..., expires=...`
 
 Set `JGS_V1_WRITE_SECRET` to the value provided with your licence:
 
-**Windows (PowerShell — persists across sessions):**
+**Windows (PowerShell, persists across sessions):**
 ```powershell
 [System.Environment]::SetEnvironmentVariable("JGS_V1_WRITE_SECRET", "your-secret-here", "User")
 ```

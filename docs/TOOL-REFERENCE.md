@@ -3,13 +3,13 @@
   SPDX-License-Identifier: LicenseRef-JGSystemsConsulting-Proprietary
 -->
 
-# JGS SysML v1 MCP Bridge — Tool Reference
+# JGS SysML v1 MCP Bridge: Tool Reference
 
 
 **Tier key:**
-- **FREE** — read-only; available without write secret
-- **PRO** — requires write tier (`enable_writes`)
-- **DANGEROUS** — requires dangerous tier (`enable_dangerous_writes`) or dev mode
+- **FREE**: read-only; available without write secret
+- **PRO**: requires write tier (`enable_writes`)
+- **DANGEROUS**: requires dangerous tier (`enable_dangerous_writes`) or dev mode
 
 ---
 
@@ -19,7 +19,7 @@ Liveness, project persistence, and undo/redo. Source: `lifecycle_tools.py`.
 
 | Tool | Description | Tier |
 |---|---|---|
-| `ping` | Liveness probe — calls the SysML v1 bridge plugin and returns its build metadata. | FREE |
+| `ping` | Liveness probe: calls the SysML v1 bridge plugin and returns its build metadata. | FREE |
 | `get_safety_state` | Return the current safety tier (READ, WRITE, or DANGEROUS) plus dev mode status. | FREE |
 | `get_licence` | Return the current licence status: tier, customer, expiry, validity. | FREE |
 | `save_project` | Save the current Cameo project. | PRO |
@@ -49,7 +49,7 @@ Atomic batch session management. Source: `batch_tools.py`.
 
 | Tool | Description | Tier |
 |---|---|---|
-| `begin_batch` | Open a batch session — all writes within are committed atomically on `commit_batch`. | PRO |
+| `begin_batch` | Open a batch session: all writes within are committed atomically on `commit_batch`. | PRO |
 | `commit_batch` | Commit all queued operations in the given batch session. | PRO |
 | `abort_batch` | Roll back all queued operations in the given batch session. | PRO |
 

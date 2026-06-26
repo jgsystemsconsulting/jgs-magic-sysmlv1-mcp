@@ -2,7 +2,7 @@
 Copyright (c) 2026 JG Systems Consulting Ltd. All Rights Reserved.
 -->
 
-# JGS SysML v1 MCP Bridge — Configuration Reference
+# JGS SysML v1 MCP Bridge: Configuration Reference
 
 ## Environment Variables
 
@@ -38,7 +38,7 @@ Every session starts in **READ** tier (no model mutations possible). Write capab
 |---|---|---|
 | `enable_writes(secret)` | Elevate to WRITE tier | PRO or higher |
 | `enable_dangerous_writes(secret)` | Elevate to DANGEROUS tier | ENTERPRISE |
-| `disable_writes()` | Step back to READ tier | — |
+| `disable_writes()` | Step back to READ tier | Any |
 | `get_safety_state` | Inspect current tier, session ceiling, remaining elevations | Any |
 | `get_licence` | Return customer name, tier, seat count, and expiry | Any |
 
