@@ -1,0 +1,14 @@
+{
+  "name": "jgs-magic-sysmlv1-mcp",
+  "owner": { "name": "JG Systems Consulting Ltd." },
+  "metadata": {
+    "description": "JG Systems Consulting MCP bridge to live SysML v1 models in CATIA Magic: query, audit, and edit them from Cursor and any MCP agent over a local, air-gapped connection."
+  },
+  "plugins": [
+    {
+      "name": "jgs-magic-sysmlv1-mcp",
+      "source": ".",
+      "description": "MCP server + CATIA Magic plugin exposing live SysML v1 models to AI agents (FREE / PRO / ENTERPRISE tiers)."
+    }
+  ]
+}

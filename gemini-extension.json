@@ -1,0 +1,11 @@
+{
+  "name": "jgs-magic-sysmlv1-mcp",
+  "version": "0.1.1",
+  "description": "MCP bridge to live SysML v1 models in CATIA Magic / Cameo Systems Modeler. Query, audit, and edit MBSE models from Gemini CLI over a local, air-gapped connection. Requires a licensed, running CATIA Magic instance with the JGS plugin.",
+  "mcpServers": {
+    "jgs-sysmlv1": {
+      "command": "python",
+      "args": ["-m", "jgsc_sysmlv1_mcp"]
+    }
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "name": "jgs-magic-sysmlv1-mcp",
+  "interface": { "displayName": "JGS Magic SysML v1 MCP" },
+  "plugins": [
+    {
+      "name": "jgs-magic-sysmlv1-mcp",
+      "source": { "source": "local", "path": "./" },
+      "policy": { "installation": "AVAILABLE", "authentication": "ON_USE" },
+      "category": "Modeling",
+      "description": "MCP server + CATIA Magic plugin exposing live SysML v1 models to AI agents (FREE / PRO / ENTERPRISE tiers)."
+    }
+  ]
+}

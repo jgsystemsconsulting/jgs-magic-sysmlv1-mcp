@@ -1,0 +1,9 @@
+{
+  "name": "jgs-magic-sysmlv1-mcp",
+  "description": "MCP bridge to live SysML v1 models in CATIA Magic (MSoSA 2026x). Query, audit, and edit models from Cursor and any MCP agent over a local, air-gapped connection. FREE / PRO / ENTERPRISE tiers.",
+  "version": "0.1.1",
+  "author": "JG Systems Consulting Ltd.",
+  "homepage": "https://github.com/jgsystemsconsulting/jgs-magic-sysmlv1-mcp",
+  "repository": "https://github.com/jgsystemsconsulting/jgs-magic-sysmlv1-mcp",
+  "license": "LicenseRef-JGSystemsConsulting-Proprietary"
+}
