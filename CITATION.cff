@@ -1,0 +1,10 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it using these metadata."
+title: jgs-magic-sysmlv1-mcp
+version: "0.1.1"
+date-released: 2026-06-28
+authors:
+  - name: "JG Systems Consulting Ltd."
+repository-code: https://github.com/jgsystemsconsulting/jgs-magic-sysmlv1-mcp
+url: https://jgsystemsconsulting.github.io/jgs-magic-sysmlv1-mcp/
+license: LicenseRef-JGSystemsConsulting-Proprietary
