@@ -22,7 +22,8 @@ jobs:
             plugin/plugin.xml server/pyproject.toml tools/verify_licence.py \
             docs/install.md docs/configuration.md docs/licensing.md \
             examples/.mcp.json.example docs/index.html docs/.nojekyll \
-            .claude-plugin/marketplace.json .claude-plugin/plugin.json ; do
+            .claude-plugin/marketplace.json .claude-plugin/plugin.json \
+            .github/ISSUE_TEMPLATE/bug_report.yml .github/ISSUE_TEMPLATE/config.yml ; do
             if [ ! -f "$f" ]; then echo "::error::missing required file: $f"; fail=1; fi
           done
           exit $fail

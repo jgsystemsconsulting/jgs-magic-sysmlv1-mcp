@@ -1,0 +1,58 @@
+name: Bug report
+description: A tool returned malformed or incorrect output
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: "For security vulnerabilities, use the advisory link on the chooser - do not file them here."
+  - type: input
+    id: version
+    attributes:
+      label: Server version
+      description: Run the `ping` tool to get this.
+    validations:
+      required: true
+  - type: dropdown
+    id: host
+    attributes:
+      label: Host agent
+      options: [Claude Code, Codex, Cursor, Gemini, Other]
+    validations:
+      required: true
+  - type: input
+    id: tool
+    attributes:
+      label: Tool name
+    validations:
+      required: true
+  - type: textarea
+    id: called
+    attributes:
+      label: What you called
+      description: The tool call and its arguments.
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: What you expected
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: What actually happened
+      description: Paste the raw output.
+    validations:
+      required: true
+  - type: textarea
+    id: extra
+    attributes:
+      label: Anything else
+  - type: checkboxes
+    id: hygiene
+    attributes:
+      label: Before submitting
+      options:
+        - label: I removed any licence keys, file paths, or credentials from the pasted output.
+          required: true

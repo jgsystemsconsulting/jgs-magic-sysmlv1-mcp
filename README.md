@@ -73,6 +73,11 @@ See [docs/install.md](docs/install.md) for full installation instructions.
   on this repository. Please do not open public issues for vulnerabilities, and do not
   email keys or licence material.
 
+**Found a bug? (agents and humans)** If a tool returns malformed or incorrect output, open
+an issue with the Bug Report form at `../../issues/new/choose`. Include the server version,
+the tool name, and the exact tool call and its output. This is a *release* repo - the fix is
+applied upstream by the maintainer, so please file an issue rather than a pull request.
+
 ## Licence
 
 Proprietary: see [LICENSE](LICENSE) and [docs/licensing.md](docs/licensing.md).
