@@ -1,4 +1,4 @@
-﻿<!--
+<!--
 Copyright (c) 2026 JG Systems Consulting Ltd. All Rights Reserved.
 -->
 
@@ -53,13 +53,20 @@ The marketplace install registers the bridge; the desktop steps (CATIA Magic plu
 
 - `plugin/`: CATIA Magic plugin JAR (copy to your plugins directory)
 - `server/`: Python MCP server (install with `pip install ./server`)
-- `docs/`: Installation guide and configuration reference
+- `docs/`: Installation guide, usage guide, and configuration reference
 - `tools/`: Licence verification utility
 - `examples/`: Sample `.mcp.json` configuration
 
 ## Quick Start
 
 See [docs/install.md](docs/install.md) for full installation instructions.
+
+## Usage
+
+[docs/usage.md](docs/usage.md) walks the first session and the everyday
+workflows: exploring the model, auditing requirement coverage, authoring a
+change under a PRO licence, and producing diagrams. The per-tool reference is
+[docs/TOOL-REFERENCE.md](docs/TOOL-REFERENCE.md).
 
 ## Requirements
 
@@ -68,19 +75,27 @@ See [docs/install.md](docs/install.md) for full installation instructions.
 
 ## Support & Security
 
-- **Support / licensing:** JG Systems Consulting Ltd.
-- **Report a security issue:** open a [private security advisory](https://github.com/jgsystemsconsulting/jgs-magic-sysmlv1-mcp/security/advisories/new)
+- **Support / licensing:** JG Systems Consulting Ltd. To request a commercial
+  or academic licence, or if you are unsure which licence you need, see
+  https://labs.jgsystemsconsulting.com/licensing.html
+- **Security issues:** open a [private security advisory](https://github.com/jgsystemsconsulting/jgs-magic-sysmlv1-mcp/security/advisories/new)
   on this repository. Please do not open public issues for vulnerabilities, and do not
   email keys or licence material.
+- **Bugs (agents and humans):** if a tool returns malformed or incorrect output, open
+  an issue with the Bug Report form at `../../issues/new/choose`. Include the server version
+  (from `ping`), the tool name, and the exact tool call and its output.
+- **Improvements:** use the Improvement form on the same
+  [issue chooser](../../issues/new/choose). Include the version from RELEASE-INFO.txt
+  and the outcome the bridge could not enable.
 
-**Found a bug? (agents and humans)** If a tool returns malformed or incorrect output, open
-an issue with the Bug Report form at `../../issues/new/choose`. Include the server version,
-the tool name, and the exact tool call and its output. This is a *release* repo - the fix is
+This is a *release* repo. The server and plugin ship from this tree and fixes are
 applied upstream by the maintainer, so please file an issue rather than a pull request.
 
 ## Licence
 
 Proprietary: see [LICENSE](LICENSE) and [docs/licensing.md](docs/licensing.md).
 
-Copyright (c) 2026 JG Systems Consulting Ltd. All Rights Reserved.
+To request a commercial or academic licence, or if you are unsure which licence
+you need: https://labs.jgsystemsconsulting.com/licensing.html
 
+Copyright (c) 2026 JG Systems Consulting Ltd. All Rights Reserved.

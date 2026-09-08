@@ -1,0 +1,42 @@
+name: Improvement
+description: A capability gap or rough edge any user of the bridge would hit
+labels: [improvement]
+body:
+  - type: markdown
+    attributes:
+      value: "For security vulnerabilities, use the advisory link on the chooser - do not file them here."
+  - type: input
+    id: version
+    attributes:
+      label: Version
+      description: From RELEASE-INFO.txt
+    validations:
+      required: true
+  - type: input
+    id: component
+    attributes:
+      label: Component
+      description: MCP tool name, the plugin JAR, a doc, or unknown
+    validations:
+      required: true
+  - type: textarea
+    id: outcome_blocked
+    attributes:
+      label: Outcome the bridge could not enable
+      description: One or two sentences. No secrets, tokens, or private model content.
+    validations:
+      required: true
+  - type: textarea
+    id: proposed_change
+    attributes:
+      label: Proposed change
+      description: What should change, and why it helps every user rather than one setup.
+    validations:
+      required: true
+  - type: checkboxes
+    id: hygiene
+    attributes:
+      label: Hygiene
+      options:
+        - label: I confirm this report contains no secrets, tokens, keys, or credentials.
+          required: true
