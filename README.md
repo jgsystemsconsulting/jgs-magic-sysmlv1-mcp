@@ -82,11 +82,12 @@ change under a PRO licence, and producing diagrams. The per-tool reference is
   on this repository. Please do not open public issues for vulnerabilities, and do not
   email keys or licence material.
 - **Bugs (agents and humans):** if a tool returns malformed or incorrect output, open
-  an issue with the Bug Report form at `../../issues/new/choose`. Include the server version
-  (from `ping`), the tool name, and the exact tool call and its output.
+  an issue with the Bug Report form at
+  https://github.com/jgsystemsconsulting/jgs-magic-sysmlv1-mcp/issues/new/choose.
+  Include the server version (from `ping`), the tool name, and the exact tool call and its output.
 - **Improvements:** use the Improvement form on the same
-  [issue chooser](../../issues/new/choose). Include the version from RELEASE-INFO.txt
-  and the outcome the bridge could not enable.
+  [issue chooser](https://github.com/jgsystemsconsulting/jgs-magic-sysmlv1-mcp/issues/new/choose).
+  Include the version from RELEASE-INFO.txt and the outcome the bridge could not enable.
 
 This is a *release* repo. The server and plugin ship from this tree and fixes are
 applied upstream by the maintainer, so please file an issue rather than a pull request.
