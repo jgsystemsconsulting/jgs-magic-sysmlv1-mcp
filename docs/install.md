@@ -1,4 +1,4 @@
-﻿<!--
+<!--
 Copyright (c) 2026 JG Systems Consulting Ltd. All Rights Reserved.
 -->
 
@@ -103,9 +103,10 @@ Copy `examples/.mcp.json.example` to your project root as `.mcp.json` and adjust
 }
 ```
 
-> **Tip:** If your venv Python is not on PATH, use the full path to the interpreter, e.g.
-> `"command": "/Users/you/.jgsc-sysmlv1/venv/bin/python"` (macOS/Linux)
-> or `"command": "C:\\Users\\you\\.jgsc-sysmlv1\\venv\\Scripts\\python.exe"` (Windows).
+> **Tip:** If your venv Python is not on PATH, point `command` at the venv interpreter,
+> e.g. `"command": "~/.jgsc-sysmlv1/venv/bin/python"` (macOS/Linux, expand `~` to your
+> home directory) or `"command": "%USERPROFILE%\\.jgsc-sysmlv1\\venv\\Scripts\\python.exe"`
+> (Windows, expand the variable).
 
 ## Step 6: Start CATIA Magic and Verify
 
