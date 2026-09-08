@@ -1,4 +1,5 @@
 # Copyright (c) 2026 JG Systems Consulting Ltd. All Rights Reserved.
+# SPDX-License-Identifier: LicenseRef-JGSystemsConsulting-Proprietary
 """Pillow-based image shrink-and-encode utility for MCP image returns.
 
 Shrinks an oversized PNG (base64-encoded) to fit within ``max_px`` on the

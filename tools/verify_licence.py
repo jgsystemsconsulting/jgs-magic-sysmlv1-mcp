@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 # Copyright (c) 2026 JG Systems Consulting Ltd. All Rights Reserved.
+# SPDX-License-Identifier: LicenseRef-JGSystemsConsulting-Proprietary
 """Verify a jgs-sysmlv2 licence file against an Ed25519 public key."""
 import argparse
 import base64

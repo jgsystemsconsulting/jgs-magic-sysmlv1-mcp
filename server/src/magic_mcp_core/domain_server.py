@@ -1,4 +1,5 @@
 # Copyright (c) 2026 JG Systems Consulting Ltd. All Rights Reserved.
+# SPDX-License-Identifier: LicenseRef-JGSystemsConsulting-Proprietary
 """FastMCP base class for per-domain Cameo MCP servers.
 
 Introduced for Plan 3 (Phase 2 Stream A — v2 Python → FastMCP migration).

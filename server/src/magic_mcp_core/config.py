@@ -1,4 +1,5 @@
 # Copyright (c) 2026 JG Systems Consulting Ltd. All Rights Reserved.
+# SPDX-License-Identifier: LicenseRef-JGSystemsConsulting-Proprietary
 """Configuration loading for Cameo MCP per-domain servers.
 
 Hosts:

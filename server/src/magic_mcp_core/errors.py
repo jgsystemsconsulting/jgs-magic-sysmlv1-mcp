@@ -1,4 +1,5 @@
 # Copyright (c) 2026 JG Systems Consulting Ltd. All Rights Reserved.
+# SPDX-License-Identifier: LicenseRef-JGSystemsConsulting-Proprietary
 """Error types for the jgs_sysmlv2_mcp MCP server.
 
 Maps RFC 7807 Problem Details from the bridge plugin to typed Python exceptions
