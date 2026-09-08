@@ -1,7 +1,7 @@
 # Copyright (c) 2026 JG Systems Consulting Ltd. All Rights Reserved.
-# Release gate for the jgs-magic-sysmlv1-mcp distribution (RR-B-15). Self-contained
-# (checkout + python3 stdlib only). Runs on untrusted PRs: read-only perms, and MUST NOT
-# execute checked-out repository code.
+# Release gate for the jgs-magic-sysmlv1-mcp distribution (RR-B-15). The gate
+# script is stdlib-only and reads the tree; the workflow carries read-only
+# permissions and no secrets.
 name: validate
 on:
   push:
@@ -13,77 +13,5 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Required files present
-        run: |
-          set -e
-          fail=0
-          for f in \
-            LICENSE COPYRIGHT NOTICE README.md CHANGELOG.md RELEASE-INFO.txt \
-            plugin/plugin.xml server/pyproject.toml tools/verify_licence.py \
-            docs/install.md docs/configuration.md docs/licensing.md \
-            examples/.mcp.json.example docs/index.html docs/.nojekyll \
-            .claude-plugin/marketplace.json .claude-plugin/plugin.json \
-            .github/ISSUE_TEMPLATE/bug_report.yml .github/ISSUE_TEMPLATE/config.yml ; do
-            if [ ! -f "$f" ]; then echo "::error::missing required file: $f"; fail=1; fi
-          done
-          exit $fail
-
-      - name: Forbidden content (leak sentinels)
-        run: |
-          set -e
-          fail=0
-          # Match the specific internal-distribution marker, not the bare word "CONFIDENTIAL"
-          # (a proprietary EULA legitimately says "Confidential Information"). Exclude .github/
-          # (these strings appear here as grep targets).
-          for s in "Not for external distribution" "BEGIN PRIVATE KEY" "BEGIN OPENSSH PRIVATE KEY"; do
-            if grep -rIl --exclude-dir=.git --exclude-dir=.github "$s" . ; then
-              echo "::error::forbidden content found: $s"; fail=1
-            fi
-          done
-          exit $fail
-
-      - name: Copyright headers present
-        run: |
-          python3 - <<'PY'
-          import glob, sys
-          HEADER = "Copyright (c) 2026 JG Systems Consulting Ltd."
-          bad = []
-          for pat in ("**/*.py",):
-              for f in glob.glob(pat, recursive=True):
-                  if ".git" in f:
-                      continue
-                  if HEADER not in open(f, encoding="utf-8", errors="ignore").read():
-                      bad.append(f)
-          if bad:
-              print("\n".join(f"missing header: {b}" for b in bad)); sys.exit(1)
-          print("headers OK")
-          PY
-
-      - name: Version single-source consistency
-        run: |
-          python3 - <<'PY'
-          import re, json, sys
-          def changelog_top():
-              for line in open("CHANGELOG.md", encoding="utf-8", errors="replace"):
-                  m = re.match(r"^##\s*\[?(\d+\.\d+\.\d+)\]?", line.strip())
-                  if m: return m.group(1)
-          rel = dict(
-              l.strip().split("=", 1)
-              for l in open("RELEASE-INFO.txt", encoding="utf-8") if "=" in l
-          )
-          ver = rel.get("version")
-          errs = []
-          if not ver: errs.append("RELEASE-INFO.txt has no version")
-          top = changelog_top()
-          if top != ver: errs.append(f"CHANGELOG top {top!r} != version {ver!r}")
-          py = open("server/pyproject.toml", encoding="utf-8").read()
-          m = re.search(r'(?m)^version\s*=\s*"([^"]+)"', py)
-          if not m or m.group(1) != ver:
-              errs.append(f"server/pyproject.toml version != {ver!r}")
-          pj = json.load(open(".claude-plugin/plugin.json", encoding="utf-8"))
-          if pj.get("version") != ver:
-              errs.append(f".claude-plugin/plugin.json version != {ver!r}")
-          if errs:
-              print("\n".join(errs)); sys.exit(1)
-          print(f"version OK: {ver}")
-          PY
+      - name: Release gate (required files, forbidden paths/content, headers, versions)
+        run: python3 scripts/check_release.py
