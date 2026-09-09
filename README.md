@@ -4,6 +4,8 @@ Copyright (c) 2026 JG Systems Consulting Ltd. All Rights Reserved.
 
 # JGS SysML v1 MCP Bridge
 
+[![jgs-magic-sysmlv1-mcp MCP server - quality and maintenance score on Glama](https://glama.ai/mcp/servers/jgsystemsconsulting/jgs-magic-sysmlv1-mcp/badges/score.svg)](https://glama.ai/mcp/servers/jgsystemsconsulting/jgs-magic-sysmlv1-mcp)
+
 AI-to-CATIA Magic bridge for SysML v1 models. Exposes your SysML v1 project to AI agents via the Model Context Protocol (MCP).
 
 ## Install with your AI agent
