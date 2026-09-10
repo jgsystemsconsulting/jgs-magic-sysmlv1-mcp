@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<!-- Copyright (c) 2026 JG Systems Consulting Ltd. All Rights Reserved. -->
+<!-- Canonical text: docs/install.md; edit the .md first, then this page. -->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='5' fill='%230a0a0b'/%3E%3Crect x='1.5' y='1.5' width='29' height='29' rx='4' fill='none' stroke='%232a2d33'/%3E%3Ctext x='16' y='22' font-family='ui-monospace,monospace' font-size='15' font-weight='700' fill='%23e8ebf0' text-anchor='middle'%3EJ%3C/text%3E%3C/svg%3E">
+<title>Install | JGS SysML v1 MCP Bridge</title>
+<meta name="description" content="Install the JGS SysML v1 MCP Bridge: plugin, Python MCP server, licence file, write secret, and MCP client wiring.">
+<link rel="stylesheet" href="site.css">
+</head>
+<body>
+
+<a href="#main-content" class="skip-link">Skip to main content</a>
+
+<header class="masthead">
+  <div class="row">
+    <span>CLASSIFICATION: <b>PUBLIC</b></span>
+    <span>LICENCE: <b>PROPRIETARY</b></span>
+    <span>DOC-ID: <b>JGS-MCP-V1</b></span>
+    <span>REV <b>0.1.1</b></span>
+    <span class="spacer"></span>
+    <nav aria-label="Site" class="site-nav">
+      <a href="index.html">Home</a>
+      <a href="install.html" aria-current="page">Install</a>
+      <a href="tools.html">Tools</a>
+      <a href="configuration.html">Configuration</a>
+      <a href="licensing.html">Licence</a>
+      <a href="https://github.com/jgsystemsconsulting/jgs-magic-sysmlv1-mcp">GitHub →</a>
+      <span class="label" style="margin:0">·</span>
+      <a href="#install-prereq" title="Prerequisites">§01</a>
+      <a href="#install-step1" title="Step 1: Install the Plugin">§02</a>
+      <a href="#install-step2" title="Step 2: Install the Python MCP Server">§03</a>
+      <a href="#install-step3" title="Step 3: Place Your Licence File (Pro/Enterprise only)">§04</a>
+      <a href="#install-step4" title="Step 4: Configure the Write Secret">§05</a>
+      <a href="#install-step5" title="Step 5: Configure Your MCP Client">§06</a>
+      <a href="#install-step6" title="Step 6: Start CATIA Magic and Verify">§07</a>
+      <a href="#install-trouble" title="Troubleshooting">§08</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap" id="main-content">
+
+  <section class="hero">
+    <p class="label">Install guide</p>
+    <h1>From download to first ping in six steps.</h1>
+    <p class="lede">Everything below runs locally. No cloud service, no model export, no telemetry.</p>
+  </section>
+
+  <section aria-labelledby="install-prereq">
+    <div class="shead">
+      <p class="label">§01</p>
+      <h2 id="install-prereq">Prerequisites</h2>
+    </div>
+    <ul>
+      <li>CATIA Magic Systems of Systems Architect 2026x (installed and licensed)</li>
+      <li>Python 3.11 or later</li>
+    </ul>
+  </section>
+
+  <section aria-labelledby="install-step1">
+    <div class="shead">
+      <p class="label">§02</p>
+      <h2 id="install-step1">Step 1: Install the Plugin</h2>
+    </div>
+    <p>Copy the <code>plugin/</code> directory from this distribution into your CATIA Magic user plugins directory:</p>
+    <p><strong>Windows:</strong></p>
+    <pre>%LOCALAPPDATA%\.magic.systems.of.systems.architect\2026x\plugins\com.jgsc.magicmcp.sysmlv1\</pre>
+    <p><strong>macOS/Linux:</strong></p>
+    <pre>~/.magic.systems.of.systems.architect/2026x/plugins/com.jgsc.magicmcp.sysmlv1/</pre>
+    <p>After copying, the plugins directory should contain:</p>
+    <pre>com.jgsc.magicmcp.sysmlv1/
+├── plugin.xml
+└── jgs-magic-sysmlv1.jar</pre>
+    <p>The bundled JAR provides all <strong>FREE-tier</strong> functionality. <strong>PRO / ENTERPRISE</strong> tiers use an additional plugin JAR (<code>jgs-pro/jgs-sysmlv1-pro.jar</code>) that is <strong>not included</strong> in this distribution. After purchasing, download it from the link supplied with your licence and install it under a <code>jgs-pro/</code> subfolder following the instructions included with that download.</p>
+    <blockquote>
+      <p><strong>Do not restart CATIA Magic yet</strong> if you have a licence file to place (see Step 3).</p>
+    </blockquote>
+  </section>
+
+  <section aria-labelledby="install-step2">
+    <div class="shead">
+      <p class="label">§03</p>
+      <h2 id="install-step2">Step 2: Install the Python MCP Server</h2>
+    </div>
+    <pre>python -m venv ~/.jgsc-sysmlv1/venv
+
+# Activate (macOS/Linux):
+source ~/.jgsc-sysmlv1/venv/bin/activate
+
+# Activate (Windows PowerShell):
+~\.jgsc-sysmlv1\venv\Scripts\Activate.ps1
+
+pip install ./server</pre>
+    <p>Verify the CLI is installed:</p>
+    <pre>jgs-magic-sysmlv1-mcp --help</pre>
+  </section>
+
+  <section aria-labelledby="install-step3">
+    <div class="shead">
+      <p class="label">§04</p>
+      <h2 id="install-step3">Step 3: Place Your Licence File (Pro/Enterprise only)</h2>
+    </div>
+    <p>Place <code>jgsc-sysmlv1-pro.licence</code> alongside the pro JAR:</p>
+    <pre>com.jgsc.magicmcp.sysmlv1/jgs-pro/jgsc-sysmlv1-pro.licence</pre>
+    <p>Inspect it with the bundled tool:</p>
+    <pre>python tools/verify_licence.py path/to/jgsc-sysmlv1-pro.licence</pre>
+    <p>Expected output: <code>Licence valid: customer=..., tier=..., seats=..., expires=...</code></p>
+  </section>
+
+  <section aria-labelledby="install-step4">
+    <div class="shead">
+      <p class="label">§05</p>
+      <h2 id="install-step4">Step 4: Configure the Write Secret</h2>
+    </div>
+    <p>Set <code>JGS_V1_WRITE_SECRET</code> to the value provided with your licence:</p>
+    <p><strong>Windows (PowerShell, persists across sessions):</strong></p>
+    <pre>[System.Environment]::SetEnvironmentVariable("JGS_V1_WRITE_SECRET", "your-secret-here", "User")</pre>
+    <p><strong>macOS/Linux:</strong></p>
+    <pre>echo 'export JGS_V1_WRITE_SECRET="your-secret-here"' &gt;&gt; ~/.profile
+source ~/.profile</pre>
+  </section>
+
+  <section aria-labelledby="install-step5">
+    <div class="shead">
+      <p class="label">§06</p>
+      <h2 id="install-step5">Step 5: Configure Your MCP Client</h2>
+    </div>
+    <p>Copy <code>examples/.mcp.json.example</code> to your project root as <code>.mcp.json</code> and adjust the Python path if needed:</p>
+    <pre>{
+  "mcpServers": {
+    "jgs-sysmlv1": {
+      "command": "python",
+      "args": ["-m", "jgsc_sysmlv1_mcp"],
+      "env": {
+        "JGS_V1_WRITE_SECRET": "${JGS_V1_WRITE_SECRET}"
+      }
+    }
+  }
+}</pre>
+    <blockquote>
+      <p><strong>Tip:</strong> If your venv Python is not on PATH, use the full path to the interpreter, e.g.
+      <code>"command": "$HOME/.jgsc-sysmlv1/venv/bin/python"</code> (macOS/Linux)
+      or <code>"command": "C:\\Users\\you\\.jgsc-sysmlv1\\venv\\Scripts\\python.exe"</code> (Windows).</p>
+    </blockquote>
+  </section>
+
+  <section aria-labelledby="install-step6">
+    <div class="shead">
+      <p class="label">§07</p>
+      <h2 id="install-step6">Step 6: Start CATIA Magic and Verify</h2>
+    </div>
+    <ol>
+      <li>Launch (or restart) CATIA Magic.</li>
+      <li>Open any SysML v1 project.</li>
+      <li>In your AI agent or MCP client, call the <code>ping</code> tool.</li>
+    </ol>
+    <p>Expected response:</p>
+    <pre>{
+  "status": "ok",
+  "plugin_version": "0.1.0",
+  "protocol_version": "1",
+  "timestamp_utc": "2026-..."
+}</pre>
+  </section>
+
+  <section aria-labelledby="install-trouble">
+    <div class="shead">
+      <p class="label">§08</p>
+      <h2 id="install-trouble">Troubleshooting</h2>
+    </div>
+    <table class="data">
+      <thead>
+        <tr>
+          <th>Symptom</th>
+          <th>Likely cause</th>
+          <th>Fix</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>Connection refused</code> on <code>ping</code></td>
+          <td>Plugin not loaded / CATIA Magic not running</td>
+          <td>Verify plugin directory structure; restart CATIA Magic</td>
+        </tr>
+        <tr>
+          <td><code>401 Unauthorized</code></td>
+          <td>Wrong or missing write secret</td>
+          <td>Verify <code>JGS_V1_WRITE_SECRET</code> matches the value supplied with your licence</td>
+        </tr>
+        <tr>
+          <td><code>403 Forbidden</code> on write tools</td>
+          <td>Session in READ tier</td>
+          <td>Call <code>enable_writes</code> with the correct secret</td>
+        </tr>
+        <tr>
+          <td>Tools return errors immediately</td>
+          <td>No project open in CATIA Magic</td>
+          <td>Open a SysML v1 project before using tools</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <footer>
+    <div class="tblock">
+      <div><span class="label">Product</span><b>jgs-magic-sysmlv1-mcp</b></div>
+      <div><span class="label">Licence</span><b><a href="licensing.html">Proprietary · FREE / PRO / ENTERPRISE</a></b></div>
+      <div><span class="label">Repository</span><b><a href="https://github.com/jgsystemsconsulting/jgs-magic-sysmlv1-mcp">github.com/jgsystemsconsulting/jgs-magic-sysmlv1-mcp</a></b></div>
+      <div><span class="label">Contact</span><b><a href="mailto:support@jgsystemsconsulting.com">support@jgsystemsconsulting.com</a></b></div>
+      <div><span class="label">Requires</span><b>CATIA Magic 2026x · Python 3.11+</b></div>
+      <div><span class="label">Revision</span><b>0.1.1</b></div>
+    </div>
+    <p class="foot-note">Copyright (c) 2026 JG Systems Consulting Ltd. All Rights Reserved. Tool catalogue generated from <a href="https://github.com/jgsystemsconsulting/jgs-magic-sysmlv1-mcp/blob/main/docs/TOOL-REFERENCE.md">docs/TOOL-REFERENCE.md</a>.</p>
+  </footer>
+
+</main>
+</body>
+</html>
