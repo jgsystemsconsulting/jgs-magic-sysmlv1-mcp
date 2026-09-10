@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<!-- Copyright (c) 2026 JG Systems Consulting Ltd. All Rights Reserved. -->
+<!-- Canonical text: docs/configuration.md; edit the .md first, then this page. -->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='5' fill='%230a0a0b'/%3E%3Crect x='1.5' y='1.5' width='29' height='29' rx='4' fill='none' stroke='%232a2d33'/%3E%3Ctext x='16' y='22' font-family='ui-monospace,monospace' font-size='15' font-weight='700' fill='%23e8ebf0' text-anchor='middle'%3EJ%3C/text%3E%3C/svg%3E">
+<title>Configuration | JGS SysML v1 MCP Bridge</title>
+<meta name="description" content="Environment variables, safety tiers, and MCP client configuration patterns for the JGS SysML v1 MCP Bridge.">
+<link rel="stylesheet" href="site.css">
+</head>
+<body>
+
+<a href="#main-content" class="skip-link">Skip to main content</a>
+
+<header class="masthead">
+  <div class="row">
+    <span>CLASSIFICATION: <b>PUBLIC</b></span>
+    <span>LICENCE: <b>PROPRIETARY</b></span>
+    <span>DOC-ID: <b>JGS-MCP-V1</b></span>
+    <span>REV <b>0.1.1</b></span>
+    <span class="spacer"></span>
+    <nav aria-label="Site" class="site-nav">
+      <a href="index.html">Home</a>
+      <a href="install.html">Install</a>
+      <a href="tools.html">Tools</a>
+      <a href="configuration.html" aria-current="page">Configuration</a>
+      <a href="licensing.html">Licence</a>
+      <a href="https://github.com/jgsystemsconsulting/jgs-magic-sysmlv1-mcp">GitHub →</a>
+      <span class="label" style="margin:0">·</span>
+      <a href="#config-env" title="Environment Variables">§01</a>
+      <a href="#config-tiers" title="Safety Tiers">§02</a>
+      <a href="#config-client" title="MCP Client Configuration Patterns">§03</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap" id="main-content">
+
+  <section class="hero">
+    <p class="label">Configuration reference</p>
+    <h1>Two environment variables. Three safety tiers.</h1>
+    <p class="lede">Sessions start read-only; writes need a licence tier and an explicit elevation call.</p>
+  </section>
+
+  <section aria-labelledby="config-env">
+    <div class="shead">
+      <p class="label">§01</p>
+      <h2 id="config-env">Environment Variables</h2>
+    </div>
+    <table class="data">
+      <thead>
+        <tr>
+          <th>Variable</th>
+          <th>Required</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>JGS_V1_WRITE_SECRET</code></td>
+          <td>No (needed for writes)</td>
+          <td>Shared secret for write-tier elevation</td>
+        </tr>
+        <tr>
+          <td><code>JGS_V1_ENDPOINT</code></td>
+          <td>No</td>
+          <td>Override bridge URL, bypasses auto-discovery</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>Auto-Discovery (default behaviour)</h3>
+    <p>Without <code>JGS_V1_ENDPOINT</code>, the server reads two files written by the plugin at startup:</p>
+    <table class="data">
+      <thead>
+        <tr>
+          <th>File</th>
+          <th>Purpose</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>%LOCALAPPDATA%\.magic.systems.of.systems.architect\2026x\jgs-sysmlv1-bridge.port</code></td>
+          <td>Bridge HTTP port</td>
+        </tr>
+        <tr>
+          <td><code>%LOCALAPPDATA%\.magic.systems.of.systems.architect\2026x\jgs-sysmlv1-bridge.token</code></td>
+          <td>Auto-generated session token</td>
+        </tr>
+      </tbody>
+    </table>
+    <p>If these files are absent, the server falls back to <code>http://127.0.0.1:18751/v1</code> with no token.</p>
+
+    <h3>Override the Endpoint</h3>
+    <pre>export JGS_V1_ENDPOINT="http://127.0.0.1:18751/v1"</pre>
+    <p>Use this when the port-file path is non-standard or when running the bridge on a remote host.</p>
+  </section>
+
+  <section aria-labelledby="config-tiers">
+    <div class="shead">
+      <p class="label">§02</p>
+      <h2 id="config-tiers">Safety Tiers</h2>
+    </div>
+    <p>Every session starts in <strong>READ</strong> tier (no model mutations possible). Write capabilities must be explicitly elevated per session:</p>
+    <table class="data">
+      <thead>
+        <tr>
+          <th>Tool</th>
+          <th>Action</th>
+          <th>Licence tier required</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>enable_writes(secret)</code></td>
+          <td>Elevate to WRITE tier</td>
+          <td>PRO or higher</td>
+        </tr>
+        <tr>
+          <td><code>enable_dangerous_writes(secret)</code></td>
+          <td>Elevate to DANGEROUS tier</td>
+          <td>ENTERPRISE</td>
+        </tr>
+        <tr>
+          <td><code>disable_writes()</code></td>
+          <td>Step back to READ tier</td>
+          <td>Any</td>
+        </tr>
+        <tr>
+          <td><code>get_safety_state</code></td>
+          <td>Inspect current tier, session ceiling, remaining elevations</td>
+          <td>Any</td>
+        </tr>
+        <tr>
+          <td><code>get_licence</code></td>
+          <td>Return customer name, tier, seat count, and expiry</td>
+          <td>Any</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section aria-labelledby="config-client">
+    <div class="shead">
+      <p class="label">§03</p>
+      <h2 id="config-client">MCP Client Configuration Patterns</h2>
+    </div>
+
+    <h3>Read-only</h3>
+    <p>No env vars required if bridge is running:</p>
+    <pre>{
+  "mcpServers": {
+    "jgs-sysmlv1": {
+      "command": "python",
+      "args": ["-m", "jgsc_sysmlv1_mcp"]
+    }
+  }
+}</pre>
+
+    <h3>With write secret</h3>
+    <pre>{
+  "mcpServers": {
+    "jgs-sysmlv1": {
+      "command": "python",
+      "args": ["-m", "jgsc_sysmlv1_mcp"],
+      "env": {
+        "JGS_V1_WRITE_SECRET": "${JGS_V1_WRITE_SECRET}"
+      }
+    }
+  }
+}</pre>
+
+    <h3>With explicit endpoint override</h3>
+    <pre>{
+  "mcpServers": {
+    "jgs-sysmlv1": {
+      "command": "python",
+      "args": ["-m", "jgsc_sysmlv1_mcp"],
+      "env": {
+        "JGS_V1_ENDPOINT": "http://127.0.0.1:18751/v1",
+        "JGS_V1_WRITE_SECRET": "${JGS_V1_WRITE_SECRET}"
+      }
+    }
+  }
+}</pre>
+  </section>
+
+  <footer>
+    <div class="tblock">
+      <div><span class="label">Product</span><b>jgs-magic-sysmlv1-mcp</b></div>
+      <div><span class="label">Licence</span><b><a href="licensing.html">Proprietary · FREE / PRO / ENTERPRISE</a></b></div>
+      <div><span class="label">Repository</span><b><a href="https://github.com/jgsystemsconsulting/jgs-magic-sysmlv1-mcp">github.com/jgsystemsconsulting/jgs-magic-sysmlv1-mcp</a></b></div>
+      <div><span class="label">Contact</span><b><a href="mailto:support@jgsystemsconsulting.com">support@jgsystemsconsulting.com</a></b></div>
+      <div><span class="label">Requires</span><b>CATIA Magic 2026x · Python 3.11+</b></div>
+      <div><span class="label">Revision</span><b>0.1.1</b></div>
+    </div>
+    <p class="foot-note">Copyright (c) 2026 JG Systems Consulting Ltd. All Rights Reserved. Tool catalogue generated from <a href="https://github.com/jgsystemsconsulting/jgs-magic-sysmlv1-mcp/blob/main/docs/TOOL-REFERENCE.md">docs/TOOL-REFERENCE.md</a>.</p>
+  </footer>
+
+</main>
+</body>
+</html>

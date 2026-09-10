@@ -4,6 +4,8 @@ Copyright (c) 2026 JG Systems Consulting Ltd. All Rights Reserved.
 
 # JGS SysML v1 MCP Bridge: Configuration Reference
 
+> Rendered version: [configuration.html](configuration.html) on the project site.
+
 ## Environment Variables
 
 | Variable | Required | Description |
