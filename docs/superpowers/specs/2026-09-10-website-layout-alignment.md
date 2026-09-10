@@ -35,7 +35,7 @@ The current site already shares the Archie visual language (dark drafting aesthe
 
 ## Non-goals
 
-- No JavaScript, no search, no dark/light toggle, no new framework or generator.
+- No new JavaScript (the existing tools.html tier-filter script stays), no search, no dark/light toggle, no new framework or generator.
 - No rewrite of page copy beyond headings, labels, and links.
 - No changes to `server/`, `plugin/`, or licensing content.
 - The `.md` files stay in the repo for GitHub readers; they are not deleted.
@@ -49,8 +49,21 @@ The current site already shares the Archie visual language (dark drafting aesthe
 - R5. Heading hierarchy stays h1 then h2 then h3 on every page; no skipped levels.
 - R6. Masthead and footer markup are identical across pages (footer adopts the Archie metadata-block pattern with this repo's facts: product, licence model, repo, contact).
 - R7. `README.md` stops linking to the deleted `docs/usage.md`; the link targets the new install page instead.
-- R8. A small check script (`scripts/check_docs_site.py`) verifies in one pass: every local href/src in `docs/*.html` resolves to an existing file or in-page anchor; every page links `site.css` and contains no duplicated token/font rules; every h2 is inside a `.shead`. It exits non-zero on violation and is wired into the existing validate workflow.
+- R8. A small check script (`scripts/check_docs_site.py`) verifies in one pass: every local href/src in `docs/*.html` resolves to an existing file, and every fragment anchor resolves inside its target file; every page links `docs/site.css` and contains no inline `<style>` block; every h2 sits inside a `.shead`. It exits non-zero on violation. The validate workflow must not execute checked-out repository code (its header invariant), so the script is not wired into CI; it runs in this change's verification and before any release that touches `docs/`.
 - R9. The `.md` siblings (`install.md`, `configuration.md`, `TOOL-REFERENCE.md`) remain the canonical text for repo readers; `tools.html` keeps its footer credit to `TOOL-REFERENCE.md`.
+
+## Audit findings and dispositions (2026-09-10 audit, satisfies G6)
+
+| Finding | Disposition |
+|---------|-------------|
+| Nav omits install/configuration/TOOL-REFERENCE content; index reaches it through GitHub blob URLs (`index.html:233,235`) | Addressed: R2, R3 |
+| Each HTML page carries a drifted copy of the shared CSS (masthead, nav, `:root`) | Addressed: R1 |
+| Heading label conventions differ per page; index Upgrade section uses an ad-hoc label | Addressed: R4 |
+| `README.md:79` links the deleted `docs/usage.md` | Addressed: R7 |
+| Feedback channels named in README but not linked from any docs page | Addressed: R6 (footer carries repo and contact links) |
+| No `docs/DISTRIBUTION.md` ledger | Waived: release-process artifact, outside this website scope |
+| Taste: CSS duplication, mixed tier accent handling, inconsistent h2 labels, licensing page missing an install path | Addressed: R1 (single stylesheet, tier accents included), R3, R4 |
+| Taste: the `§NN` numbering reads as arbitrary | Design: kept as a deliberate drafting convention, restart per page (R4) |
 
 ## Approaches considered
 
@@ -61,8 +74,8 @@ The current site already shares the Archie visual language (dark drafting aesthe
 ## Verification
 
 - R8's script is the runnable check; it must pass on the finished tree.
-- Manual pass: open each page locally and confirm nav, labels, and footer match the requirements; confirm Pages will serve the new pages (static files beside `.nojekyll`).
-- Diff review: no content changes outside `docs/` except `README.md:79` and the workflow wiring.
+- Manual pass: open each page locally and confirm nav, labels, and footer match the requirements; confirm Pages will serve the new pages (static files beside `.nojekyll`). The script cannot judge nav contents, heading order, or masthead/footer identity; the manual pass is the guard for those.
+- Diff review: no content changes outside `docs/` except `README.md:79` and the new `scripts/check_docs_site.py`.
 
 ## Risks
 
