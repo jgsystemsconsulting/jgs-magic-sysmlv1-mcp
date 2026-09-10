@@ -13,6 +13,10 @@
 | A4: Task 10 diff expectation unverifiable without baseline | R1 | R1 | Advisory-skipped | git status at Task 1 gives an implicit baseline; capturing it explicitly is optional. |
 | A5: Nav HTML given only for index anchors | R1 | R1 | FP | Plan L401 lists each page's anchor targets; page links are identical across pages. |
 | A6: md mapping omits emphasis/escaping; table.data rules unspecified | R1 | R1 | Advisory-skipped | Add strong/escape mapping and a table.data rule if cheap during Task 2; non-blocking. |
+| A1: tools sections keep index --pad-section clamp, growing padding vs tools.html design | R2 | R2 | Advisory-skipped | Cosmetic padding delta only; unifying on one token is the plan's intent, override note optional. |
+| A2: Task 4 Files still says configuration.md left uncommitted; Step 5 commits it | R2 | R2 | Advisory-skipped | Wording clash only; executor following Step 5 and the commit policy ships correct behavior. |
+| A3: Interfaces say nav block verbatim on all pages; Step 1 varies in-page anchors | R2 | R2 | Advisory-skipped | Wording clash only; Step 1 parenthetical governs anchors, executor ships correct nav. |
+| A4: Task 10 manual pass omits .nojekyll confirmation from spec Verification | R2 | R2 | Genuine | Cheap one-line bullet closes a spec Verification clause nothing else checks; add to Task 10 Step 2. |
 
 ## Round 1 Summary
 
@@ -35,3 +39,23 @@
 Fixes applied: 12 (6 genuine CRITICAL/MAJOR + 6 advisory)
 Inflation rate: 0% (0 of 7 CRITICAL+MAJOR findings triaged FP/Design)
 Validation: SKIP
+
+## Round 2 Summary
+
+| Finding | Lens | Severity | Verdict | Action |
+|---------|------|----------|---------|--------|
+| 12 Round-1 fix confirmations | saboteur, new_hire, auditor | - | - | All confirmed "resolved by this change" (Round 2) |
+| --pad-section token drift on tools | saboteur | ADV | Advisory-skipped | Unified tokens are the R1 intent; manual pass reviews look (Round 2) |
+| Task 4 Files line vs Step 5 wording | new_hire | ADV | Advisory-skipped | Step text governs; no broken behaviour (Round 2) |
+| Nav "verbatim" vs per-page anchors wording | new_hire | ADV | Advisory-skipped | Parenthetical governs; no broken behaviour (Round 2) |
+| .nojekyll check missing from Task 10 | auditor | ADV | Advisory | Fixed (Round 2) |
+
+Fixes applied: 1 (advisory)
+Inflation rate: n/a (0 CRITICAL+MAJOR findings this round)
+Validation: SKIP
+
+## Converged: Round 2
+
+Track 1: Merged verdict NO_CRITICAL_OR_MAJOR.
+Total rounds: 2  |  Total fixes: 13
+Document is ready.

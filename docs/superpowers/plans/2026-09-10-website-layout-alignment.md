@@ -537,7 +537,7 @@ Expected: `5 pages checked, 0 findings`, exit 0.
 
 - [ ] **Step 2: Manual pass (spec Verification section)**
 
-Open each of the five pages in a browser and confirm: masthead nav shows Home · Install · Tools · Configuration · Licence · GitHub plus the page's §NN anchors (tools: catnav instead); every section shows its §NN label above its h2; heading order on every page is exactly one h1 followed by h2 sections, with h3s only inside them and no skipped levels (spec R5); the footer grid shows the six metadata cells identically on every page; mobile width (~400px) collapses grids and the footer to one column.
+Open each of the five pages in a browser and confirm: masthead nav shows Home · Install · Tools · Configuration · Licence · GitHub plus the page's §NN anchors (tools: catnav instead); every section shows its §NN label above its h2; heading order on every page is exactly one h1 followed by h2 sections, with h3s only inside them and no skipped levels (spec R5); the footer grid shows the six metadata cells identically on every page; mobile width (~400px) collapses grids and the footer to one column. Confirm `docs/.nojekyll` is still present so Pages serves the new pages as static files.
 
 - [ ] **Step 3: Diff review (spec Verification section)**
 
