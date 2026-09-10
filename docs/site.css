@@ -112,8 +112,8 @@ blockquote { margin: 0; border-left: 2px solid var(--line-2); padding: 4px 0 4px
 .catnav a:hover { color: var(--text-hi); }
 .ct { color: var(--mute); }
 
-/* tools used tighter --pad-section; keep that bottom pad on .cat only */
-section.cat { padding: 8px 0 clamp(40px, 5vw, 72px); border-bottom: 1px solid var(--line); }
+section.cat { padding: 8px 0 var(--pad-section); border-bottom: 1px solid var(--line); }
+section.cat .sec-label { margin: 0 0 16px; scroll-margin-top: 64px; }
 .tbl-scroll { overflow-x: auto; border: 1px solid var(--line); }
 table.tools { border-collapse: collapse; width: 100%; min-width: 620px; font-size: 0.92rem; }
 table.tools th, table.tools td { text-align: left; padding: 11px 16px; border-bottom: 1px solid var(--line); vertical-align: top; }
@@ -130,6 +130,7 @@ tr.hide { display: none; }
 
 /* Licensing matrix / notes */
 .matrix-scroll { overflow-x: auto; border: 1px solid var(--line); margin-top: 24px; }
+.matrix-scroll + .grid { margin-top: 24px; }
 table.matrix { border-collapse: collapse; width: 100%; min-width: 560px; font-size: 0.95rem; }
 table.matrix th, table.matrix td { text-align: left; padding: 14px 18px; border-bottom: 1px solid var(--line); }
 table.matrix thead th { font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--mute); background: var(--ink-2); }
@@ -159,6 +160,18 @@ footer { padding: 40px 0 64px; }
 .tblock a:hover { color: var(--text-hi); }
 .foot-note { margin-top: 1.5rem; font: 400 0.8125rem/1.6 var(--mono); color: var(--mute); }
 .foot-note a { color: var(--mute-2); }
+
+/* Page-scoped deltas (body.tools / body.licensing added in later HTML tasks) */
+body.tools { --pad-section: clamp(40px, 5vw, 72px); }
+body.tools .hero { padding: var(--pad-section) 0 28px; }
+body.tools .hero h1 { font-size: clamp(1.8rem, 4vw, 2.6rem); margin: 14px 0 14px; line-height: 1.1; }
+body.tools .hero p.lede { font-size: clamp(1rem, 2vw, 1.15rem); color: var(--text); max-width: 64ch; margin: 0; }
+
+body.licensing .hero h1 { font-size: clamp(1.8rem, 4vw, 2.75rem); margin: 14px 0 16px; line-height: 1.1; }
+body.licensing .hero p.lede { font-size: clamp(1rem, 2vw, 1.2rem); color: var(--text); max-width: 62ch; margin: 0; }
+body.licensing .cell h3 { margin: 6px 0 8px; font-size: 1.05rem; }
+body.licensing .cell p { margin: 0; font-size: 0.95rem; color: var(--mute-2); }
+body.licensing pre { padding: 18px 20px; margin-top: 18px; }
 
 :focus-visible { outline: 2px solid var(--paper); outline-offset: 2px; }
 .skip-link { position: absolute; top: -100%; left: 0; background: var(--paper); color: var(--paper-ink); padding: 8px 16px; font-family: var(--mono); font-size: 0.85rem; z-index: 9999; text-decoration: none; }
