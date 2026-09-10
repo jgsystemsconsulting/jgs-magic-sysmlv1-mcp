@@ -29,7 +29,7 @@ Verified facts the tasks rely on (checked 2026-09-10):
 - `docs/tools.html`: `<style>` L28-104 (includes `.catnav` L77-79, `.sec-label` L83, tier accents `--free/--pro/--ent`); nav L108-126; 11 `section.cat` blocks L168-367 with h2 ids `lifecycle-tools-h` … `v1-vocabulary-tools-h`; footer L368-373; filter `<script>` L376-398.
 - `docs/licensing.html`: `<style>` L27-109; nav L115-127; sections `sec-matrix`, `sec-place`, `sec-verify`, `sec-cta` (ad-hoc Upgrade label L195, h2 L196); footer L205-210.
 - `README.md:79` links `docs/usage.md`, deleted in the working tree.
-- Archie reference (read-only source, do not modify): `C:\Users\gower\OneDrive\Documents\GitHub\jgs-archi-skills\docs\site.css` provides `.shead`, `.tblock`, `.foot-note` patterns; this repo's pages share its token set (`:root` differs only in `--mute`).
+- Archie reference (read-only source, do not modify): `C:\Users\gower\OneDrive\Documents\GitHub\jgs-archi-skills\docs\site.css` provides `.shead`, `.tblock`, `.foot-note` patterns; this repo's pages share its token set. Note: tools.html's `:root` (L34-43) adds `--free/--pro/--ent` and drops `--ink-4` relative to index.html:48-57.
 - `docs/.nojekyll` present; GitHub Pages serves `docs/` at `https://jgsystemsconsulting.github.io/jgs-magic-sysmlv1-mcp/`.
 
 ## File Structure
@@ -510,8 +510,8 @@ The rendered site carries the same catalogue plus the
 
 - [ ] **Step 2: Verify no other usage.md references**
 
-Run: `grep -rn "usage\.md" README.md docs/ .github/ || echo clean`
-Expected: `clean` (the pointer comments and new pages never name usage.md).
+Run: `grep -rn "usage\.md" README.md .github/ || echo clean`
+Expected: `clean`. (The plan and spec files under `docs/superpowers/` discuss the dead link by name; they are pipeline artifacts, not shipped docs, so the grep scopes to README and workflow files.)
 
 - [ ] **Step 3: No commit.** Record: `README.md fixed; left uncommitted (pre-existing working-tree edits).`
 
