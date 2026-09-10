@@ -6,7 +6,7 @@ Scope: `docs/` website (GitHub Pages from `docs/`) plus the README links that po
 
 ## Problem
 
-The site's top menu does not match what the pages contain. The nav offers Home, Tools, and Licence, while install and configuration instructions live in `install.md` and `configuration.md` that the nav never mentions and the index reaches only through raw GitHub blob URLs (`docs/index.html:233,235`). Heading conventions drift between pages: the index numbers its sections ("§01 · The problem") while tools.html and licensing.html use plain h2s, and `index.html` has an `h2 id="sec-upgrade"` with no visible label at all. Each HTML page carries its own copy of the CSS with small drift between copies, so the same component looks slightly different per page. Separately, `README.md:79` links to `docs/usage.md`, which is deleted in the working tree.
+The site's top menu does not match what the pages contain. The nav offers Home, Tools, and Licence, while install and configuration instructions live in `install.md` and `configuration.md` that the nav never mentions and the index reaches only through raw GitHub blob URLs (`docs/index.html:233,235`). Heading conventions drift between pages: the index numbers its sections ("§01 · The problem") while tools.html and licensing.html use unnumbered label h2s, and the index's Upgrade section carries an ad-hoc label paragraph outside the shared section-heading pattern (`docs/index.html:255-256`). Each HTML page carries its own copy of the CSS with small drift between copies, so the same component looks slightly different per page. Separately, `README.md:79` links to `docs/usage.md`, which is deleted in the working tree.
 
 The owner asked for two things: audit the site against the release standard (`release-repo-standard` skill) and the taste rubric (`taste-skill`), then bring across the layout of the JGS Archie skills site, which he considers well laid out.
 
@@ -17,7 +17,7 @@ Source: `C:\Users\gower\OneDrive\Documents\GitHub\jgs-archi-skills\docs\`, publi
 Its layout rests on five patterns the current site lacks or applies inconsistently:
 
 1. One shared `site.css` (81 lines) holds every token, font, component, and the responsive rules. Pages carry content only.
-2. The nav mirrors reality: page links plus in-page section anchors, so every section on the page is reachable from the top menu.
+2. On the pages that have sections (the index, guide, and engagement pages), the nav adds in-page section anchors, so every section on those pages is reachable from the top menu.
 3. Every section opens the same way: a mono `.label` above the h2 (`.shead` wrapper). The reader always knows where they are.
 4. A metadata masthead row and a structured footer block repeat on every page.
 5. Polish lives in the stylesheet once: focus-visible ring, responsive break, table and code styling.
@@ -73,4 +73,4 @@ The current site already shares the Archie visual language (dark drafting aesthe
 
 research: skipped (static HTML/CSS layout work with no external API, library, or version-sensitive surface; the reference site and all evidence are local files inspected on 2026-09-10)
 
-Reference URLs: https://jgsystemsconsulting.github.io/jgs-archi-skills/ (layout reference, verified live 2026-09-10); https://github.com/jgsystemsconsulting/jgs-archi-skills (its source repo)
+Reference URLs: https://jgsystemsconsulting.github.io/jgs-archi-skills/ (layout reference; layout verified from the local repo source, 2026-09-10); https://github.com/jgsystemsconsulting/jgs-archi-skills (its source repo)
