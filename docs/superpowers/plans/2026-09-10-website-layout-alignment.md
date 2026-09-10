@@ -10,11 +10,13 @@
 
 **Spec:** `docs/superpowers/specs/2026-09-10-website-layout-alignment.md` (review pair clean: FCL Round 2, ARL Round 3)
 
+**Execution order:** Tasks 1, 2, 6, 3, 4, 5, 7, 8, 9, 10. Task 6 defines the shared nav and footer blocks that Tasks 3-5 and 7-8 copy verbatim; read it before starting Task 3.
+
 ## Global Constraints
 
 - The validate workflow (`.github/workflows/validate.yml:2-4`) MUST NOT execute checked-out repository code; the check script is NOT wired into CI (spec R8).
 - No new JavaScript. The existing tools.html tier-filter `<script>` block (tools.html:376-398) stays as-is.
-- COMMIT POLICY: commit only files this plan CREATES (`docs/site.css`, `docs/install.html`, `docs/configuration.html`, `scripts/check_docs_site.py`, plan artifacts). Files that were already modified in the working tree before this plan (`docs/index.html`, `docs/tools.html`, `docs/licensing.html`, `docs/install.md`, `README.md`) are edited but LEFT UNCOMMITTED; the user's in-flight release edits in those files must not be folded into these commits. Verify with `git status` before each commit; use explicit paths in `git add`.
+- COMMIT POLICY: commit only files this plan CREATES (`docs/site.css`, `docs/install.html`, `docs/configuration.html`, `scripts/check_docs_site.py`, plan artifacts) plus the pointer line in `docs/configuration.md` (that file had no pre-existing edits, so committing it is safe). Files that were already modified in the working tree before this plan (`docs/index.html`, `docs/tools.html`, `docs/licensing.html`, `docs/install.md`, `README.md`) are edited but LEFT UNCOMMITTED; the user's in-flight release edits in those files must not be folded into these commits. Before starting Task 1, capture `git status --short` to a scratch file; Task 10 compares against that baseline. Verify with `git status` before each commit; use explicit paths in `git add`.
 - Every `.py` file needs the header `Copyright (c) 2026 JG Systems Consulting Ltd.` (validate.yml scans `**/*.py`).
 - All revision strings stay `0.1.1`; product name `jgs-magic-sysmlv1-mcp`; contact `support@jgsystemsconsulting.com`; repo `https://github.com/jgsystemsconsulting/jgs-magic-sysmlv1-mcp`.
 - Keep every existing `id` on every page (nav anchors, hero CTAs, and `aria-labelledby` point at them). New ids only where a section had none.
@@ -88,7 +90,7 @@ class PageParser(HTMLParser):
         cls = a.get("class", "")
         if tag == "style":
             self.has_style = True
-        if tag == "link" and a.get("rel") == "stylesheet" and a.get("href", "").endswith("site.css"):
+        if tag == "link" and a.get("rel") == "stylesheet" and a.get("href") == "site.css":
             self.links_site_css = True
         for key in ("href", "src"):
             if key in a:
@@ -97,7 +99,7 @@ class PageParser(HTMLParser):
             self.ids.add(a["id"])
         if tag == "h2" and not any(t == "div" and "shead" in c.split() for t, c in self.stack):
             self.problems.append(f"{self.name}:{line} h2 not inside .shead")
-        void = {"meta", "link", "img", "br", "hr", "input", "source", "wbr"}
+        void = {"meta", "link", "img", "br", "hr", "input", "source", "wbr", "col", "area", "track", "base", "embed"}
         if tag not in void:
             self.stack.append((tag, cls))
 
@@ -207,7 +209,16 @@ Build the file in this order. Rules marked (index Lnn) are copied from the curre
 blockquote { margin: 0; border-left: 2px solid var(--line-2); padding: 4px 0 4px 18px; color: var(--text); }
 ```
 
-12. Tables: port from the tools block every rule targeting `table.tools`, `.filter`, `.hide`, `.ct`, `.cat`, tier badge/cell selectors that reference `--free/--pro/--ent`; port from the licensing block every table/caption/tier rule (L27-109) not already present. Dedupe: where a selector exists on two pages with identical declarations keep one copy; where declarations differ keep the index version and add the differing extras under a `/* tools-page */` or `/* licensing-page */` comment.
+12. Tables and page-specific rules: port EVERY rule from the tools block (`docs/tools.html:28-104`) and the licensing block (`docs/licensing.html:27-109`) into this file. Their selector inventories include `.catnav`, `.tools`, `.filter`, `.hide`, `.ct`, `.cat`, `.counts`, `.controls`, `.tbl-scroll`, the tier accent rules referencing `--free/--pro/--ent`, and licensing's `.note`, `.matrix-scroll`, and its table/caption rules; do not drop any selector that the pages' markup uses. Then add these base table rules (NEW):
+```css
+table.data { width: 100%; border-collapse: collapse; font-size: 0.9375rem; }
+table.data th, table.data td { text-align: left; vertical-align: top; padding: 14px 16px; border-bottom: 1px solid var(--line); }
+table.data th { font: 700 0.6875rem/1.4 var(--mono); letter-spacing: 0.12em; text-transform: uppercase; color: var(--mute); background: var(--ink-3); }
+table.data td { color: var(--text); }
+table.data code { font: 400 0.8125rem var(--mono); color: var(--text-hi); }
+table.data caption { caption-side: bottom; text-align: left; padding: 12px 0 0; font: 400 0.8125rem/1.5 var(--mono); color: var(--mute); }
+```
+Dedupe: where the identical selector appears on two pages with identical declarations, keep one copy (prefer the index version). Where the same selector carries DIFFERENT declarations on different pages, never leave two conflicting copies: scope each to its page's markup as it exists (e.g. `table.tools th` for the tools catalogue; licensing's table styling under its own table class found in the markup), or fold the difference into the shared rule when it is safe for every page.
 13. Footer: drop the old `footer p` typography only in favour of NEW:
 
 ```css
@@ -226,7 +237,7 @@ footer { padding: 40px 0 64px; }
 
 - [ ] **Step 2: Sanity-check the file**
 
-Run: `python -c "open('docs/site.css',encoding='utf-8').read(); print('ok')"` and confirm the file contains `.shead`, `.tblock`, `--pro`, `table.tools` (or the tools table selectors), and the `@media (max-width: 860px)` block.
+Run: `python -c "open('docs/site.css',encoding='utf-8').read(); print('ok')"` and confirm the file contains `.shead`, `.tblock`, `.catnav`, `.counts`, `.note`, `table.data`, `--pro`, and the `@media (max-width: 860px)` block.
 Expected: `ok`, all five markers present.
 
 - [ ] **Step 3: Commit**
@@ -262,7 +273,7 @@ Head: `<!DOCTYPE html>`, copyright comment `<!-- Copyright (c) 2026 JG Systems C
 
 - [ ] **Step 2: Convert the content**
 
-Map `docs/install.md` (from `## Prerequisites` to the end of Troubleshooting) with this mapping: `## X` → `<section aria-labelledby="..."><div class="shead"><p class="label">§NN</p><h2 id="...">X</h2></div>` then content then `</section>`; fenced code → `<pre>`; `- item` → `<ul><li>`; `1.` list → `<ol><li>`; `> note` → `<blockquote>`; pipe tables → `<table class="data">` with `<thead>`/`<tbody>`; `` `code` `` → `<code>`. Sections in order: §01 Prerequisites (`id="install-prereq"`), §02 Step 1: Install the plugin (`install-step1`), §03 Step 2: Install the Python MCP server (`install-step2`), §04 Step 3: Place your licence file (`install-step3`), §05 Step 4: Configure the write secret (`install-step4`), §06 Step 5: Configure your MCP client (`install-step5`), §07 Step 6: Start CATIA Magic and verify (`install-step6`), §08 Troubleshooting (`install-trouble`). Transfer the text verbatim; keep all code blocks intact including the PowerShell and JSON ones.
+Map `docs/install.md` (from `## Prerequisites` to the end of Troubleshooting) with this mapping: `## X` → `<section aria-labelledby="..."><div class="shead"><p class="label">§NN</p><h2 id="...">X</h2></div>` then content then `</section>`; fenced code → `<pre>`; `- item` → `<ul><li>`; `1.` list → `<ol><li>`; `> note` → `<blockquote>`; pipe tables → `<table class="data">` with `<thead>`/`<tbody>`; `` `code` `` → `<code>`; `**text**` → `<strong>`; escape `<`, `>`, and `&` as HTML entities inside `<pre>` content. Sections in order: §01 Prerequisites (`id="install-prereq"`), §02 Step 1: Install the plugin (`install-step1`), §03 Step 2: Install the Python MCP server (`install-step2`), §04 Step 3: Place your licence file (`install-step3`), §05 Step 4: Configure the write secret (`install-step4`), §06 Step 5: Configure your MCP client (`install-step5`), §07 Step 6: Start CATIA Magic and verify (`install-step6`), §08 Troubleshooting (`install-trouble`). Transfer the text verbatim; keep all code blocks intact including the PowerShell and JSON ones.
 
 - [ ] **Step 3: Close the page**
 
@@ -276,7 +287,7 @@ In `docs/install.md`, directly under the `# JGS SysML v1 MCP Bridge: Installatio
 - [ ] **Step 5: Run the check and inspect**
 
 Run: `python scripts/check_docs_site.py`
-Expected: no findings mention `install.html` (it links site.css and has no inline styles); the not-yet-migrated pages still report their expected pre-migration findings.
+Expected: exactly one finding names `install.html`, and it is the forward link to the page Task 4 creates: `install.html:... broken link: configuration.html`. No other findings mention `install.html`; the not-yet-migrated pages still report their expected pre-migration findings.
 
 - [ ] **Step 6: Commit**
 
@@ -321,12 +332,12 @@ Footer block from Task 6, then `</main></body></html>`. In `docs/configuration.m
 - [ ] **Step 4: Run the check**
 
 Run: `python scripts/check_docs_site.py`
-Expected: no findings mention `configuration.html`.
+Expected: no findings mention `configuration.html`, and the Task 3 `broken link: configuration.html` finding is gone.
 
 - [ ] **Step 5: Commit**
 
 ```bash
-git add docs/configuration.html
+git add docs/configuration.html docs/configuration.md
 git commit -m "docs: add configuration.html rendering of configuration.md"
 ```
 
@@ -346,7 +357,7 @@ Delete lines 42-148 (`<style>` … `</style>`) and insert `<link rel="stylesheet
 
 - [ ] **Step 2: Convert the six section headings**
 
-Keep each `<section>` wrapper and every `aria-labelledby`. Replace each combined heading with the split pattern. Exact mappings:
+Line numbers below are anchors from the pre-edit file; they shift once Step 1 deletes the style block, so locate each heading by its quoted text, not by line number. Keep each `<section>` wrapper and every `aria-labelledby`. Replace each combined heading with the split pattern. Exact mappings:
 
 - L190 `<h2 class="label sec-label" id="sec-problem">§01 · The problem</h2>` → `<div class="shead"><p class="label">§01</p><h2 id="sec-problem">The problem</h2></div>`
 - L203 same shape: label `§02`, h2 `How it works`, id `sec-how`
@@ -357,7 +368,7 @@ Keep each `<section>` wrapper and every `aria-labelledby`. Replace each combined
 
 - [ ] **Step 3: Extend the nav and replace the footer**
 
-Nav: replace the four links inside `<nav aria-label="Site" class="site-nav">` (L162-165) with the Task 6 nav block, `aria-current="page"` on Home, and the in-page anchor list `§01`–`§06` targeting `#sec-problem` … `#sec-upgrade`. Footer: replace L268-271 `<p>…</p>` with the Task 6 footer block.
+Nav: replace the four links inside `<nav aria-label="Site" class="site-nav">` with the Task 6 nav block, `aria-current="page"` on Home, and the in-page anchor list `§01`-`§06` targeting `#sec-problem` … `#sec-upgrade`. Footer: replace the ENTIRE existing `<footer>…</footer>` element with THE FOOTER BLOCK from Task 6 (the block includes its own `<footer>` wrapper; do not nest it inside the old one).
 
 - [ ] **Step 4: Run the check and eyeball the page**
 
@@ -398,7 +409,7 @@ THE NAV BLOCK (page links in this exact order; keep `GitHub →`; append the pag
 <a href="#sec-upgrade" title="Upgrade">§06</a>
 ```
 
-(Anchor list per page: index `§01`-`§06` as above; install `§01`-`§08` targeting `#install-prereq`, `#install-step1`…`#install-step6`, `#install-trouble`; configuration `§01`-`§03` targeting `#config-env`, `#config-tiers`, `#config-client`; licensing `§01`-`§04` targeting `#sec-matrix`, `#sec-place`, `#sec-verify`, `#sec-cta`; tools: none in masthead.)
+(Anchor list per page: index `§01`-`§06` as above; install `§01`-`§08` targeting `#install-prereq`, `#install-step1`...`#install-step6`, `#install-trouble`; configuration `§01`-`§03` targeting `#config-env`, `#config-tiers`, `#config-client`; licensing `§01`-`§04` targeting `#sec-matrix`, `#sec-place`, `#sec-verify`, `#sec-cta`; tools: none in masthead. Each anchor carries a `title` attribute with its section's h2 text, e.g. for install.html: `<a href="#install-prereq" title="Prerequisites">§01</a>` through `<a href="#install-trouble" title="Troubleshooting">§08</a>`.)
 
 THE FOOTER BLOCK (identical on all five pages):
 
@@ -432,15 +443,15 @@ This task only standardises the blocks; page applications happen in Tasks 3-5, 7
 
 - [ ] **Step 1: Style swap**
 
-Delete L28-104, insert `<link rel="stylesheet" href="site.css">`. (All tools-specific rules were ported in Task 2 step 12.)
+Delete the `<style>`...`</style>` block (approx. L28-104; locate by tags), insert `<link rel="stylesheet" href="site.css">`. (All tools-specific rules were ported in Task 2 step 12.)
 
-- [ ] **Step 2: Convert the eleven category headings**
+- [ ] **Step 2: Convert the eleven category headings** (line numbers approximate; locate each heading by its quoted text)
 
 For each of the 11 `section.cat` blocks, replace `<h2 class="label sec-label" id="X">Name <span class="ct">N</span></h2>` with `<div class="shead"><p class="label">§NN</p><h2 id="X">Name <span class="ct">N</span></h2></div>`. Numbering in page order: §01 Lifecycle (`lifecycle-tools-h`), §02 Safety, §03 Batch, §04 Read, §05 Write, §06 Modify, §07 Relationship, §08 Quality, §09 Diagram, §10 Macro, §11 V1 Vocabulary.
 
 - [ ] **Step 3: Nav and footer**
 
-Apply THE NAV BLOCK with `aria-current="page"` on Tools and NO §NN anchors (the `.catnav` under the h1 remains the section-anchor row). Replace the footer `<p>` with THE FOOTER BLOCK.
+Apply THE NAV BLOCK with `aria-current="page"` on Tools and NO §NN anchors (the `.catnav` under the h1 remains the section-anchor row). Replace the ENTIRE existing `<footer>…</footer>` element with THE FOOTER BLOCK (the block includes its own `<footer>` wrapper).
 
 - [ ] **Step 4: Run the check and test the filter**
 
@@ -455,9 +466,9 @@ Run: `python scripts/check_docs_site.py`; Expected: no findings mention `tools.h
 **Files:**
 - Modify: `docs/licensing.html` (L27-109 style, L122-127 nav, L144-196 h2s, L205-210 footer)
 
-- [ ] **Step 1: Style swap**; delete L27-109, insert `<link rel="stylesheet" href="site.css">`.
+- [ ] **Step 1: Style swap**; delete the `<style>`...`</style>` block (approx. L27-109; locate by tags), insert `<link rel="stylesheet" href="site.css">`.
 
-- [ ] **Step 2: Convert the four headings**
+- [ ] **Step 2: Convert the four headings** (line numbers approximate; locate by quoted text)
 
 - `sec-matrix`: label `§01`, h2 `What each tier unlocks`
 - `sec-place`: label `§02`, h2 `Place your licence file`
@@ -466,7 +477,7 @@ Run: `python scripts/check_docs_site.py`; Expected: no findings mention `tools.h
 
 Keep the matrix table markup as-is (its caption inline styles stay; they reference existing CSS variables).
 
-- [ ] **Step 3: Nav and footer**; THE NAV BLOCK with `aria-current="page"` on Licence and anchors `§01`-`§04`; THE FOOTER BLOCK.
+- [ ] **Step 3: Nav and footer**; THE NAV BLOCK with `aria-current="page"` on Licence and anchors `§01`-`§04`; replace the ENTIRE existing `<footer>...</footer>` element with THE FOOTER BLOCK (the block includes its own `<footer>` wrapper).
 
 - [ ] **Step 4: Run the check**
 
@@ -500,10 +511,10 @@ with:
 ```markdown
 ## Usage
 
-[docs/TOOL-REFERENCE.md](docs/TOOL-REFERENCE.md) is the per-tool reference.
-The rendered site carries the same catalogue plus the
-[install guide](docs/install.html) and the
-[configuration reference](docs/configuration.md).
+[docs/TOOL-REFERENCE.md](docs/TOOL-REFERENCE.md) is the per-tool reference,
+and [docs/install.md](docs/install.md) plus
+[docs/configuration.md](docs/configuration.md) cover setup and configuration.
+The same pages render on the project site with the full tool catalogue.
 ```
 
 (The first-session walkthrough content lived only in the deleted usage.md; the install and configuration pages plus TOOL-REFERENCE cover the remaining links. If the walkthrough text is wanted later it needs a new home, which is out of scope here.)
@@ -526,12 +537,12 @@ Expected: `5 pages checked, 0 findings`, exit 0.
 
 - [ ] **Step 2: Manual pass (spec Verification section)**
 
-Open each of the five pages in a browser and confirm: masthead nav shows Home · Install · Tools · Configuration · Licence · GitHub plus the page's §NN anchors (tools: catnav instead); every section shows its §NN label above its h2; the footer grid shows the six metadata cells identically on every page; mobile width (~400px) collapses grids and the footer to one column.
+Open each of the five pages in a browser and confirm: masthead nav shows Home · Install · Tools · Configuration · Licence · GitHub plus the page's §NN anchors (tools: catnav instead); every section shows its §NN label above its h2; heading order on every page is exactly one h1 followed by h2 sections, with h3s only inside them and no skipped levels (spec R5); the footer grid shows the six metadata cells identically on every page; mobile width (~400px) collapses grids and the footer to one column.
 
 - [ ] **Step 3: Diff review (spec Verification section)**
 
-Run: `git status --short` and `git diff --stat`
-Expected: committed new files = `docs/site.css`, `docs/install.html`, `docs/configuration.html`, `scripts/check_docs_site.py` (+ plan artifacts); uncommitted modified files = exactly `docs/index.html`, `docs/tools.html`, `docs/licensing.html`, `docs/install.md`, `docs/configuration.md`, `README.md` plus the user's pre-existing edits elsewhere (server/, CHANGELOG, etc.; untouched by this plan). No other files changed.
+Run: `git status --short` and `git diff --stat`, and compare the working-tree list against the baseline snapshot captured before Task 1.
+Expected: committed new files = `docs/site.css`, `docs/install.html`, `docs/configuration.html`, `scripts/check_docs_site.py` (+ plan artifacts) plus the `docs/configuration.md` pointer line; uncommitted modified files = `docs/index.html`, `docs/tools.html`, `docs/licensing.html`, `docs/install.md`, `README.md` (each carrying this plan's edits on top of the user's pre-existing edits) plus the user's pre-existing edits elsewhere (server/, CHANGELOG, etc.; untouched by this plan). No other files changed versus the baseline.
 
 - [ ] **Step 4: Report**
 
