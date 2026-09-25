@@ -63,6 +63,8 @@ nav.site{border-bottom:1px solid var(--line);}
 nav.site .wrap{display:flex;flex-wrap:wrap;align-items:center;gap:.75rem 1.5rem;padding-top:12px;padding-bottom:12px;}
 nav.site a{font:700 .6875rem/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;border:0;color:var(--mute-2);}
 nav.site a:hover{color:var(--text-hi);}
+.brand{display:inline-flex;align-items:center;}
+.brand img{display:block;}
 table.data{width:100%;border-collapse:collapse;font-size:.9375rem;}
 table.data th,table.data td{text-align:left;vertical-align:top;padding:14px 16px;border-bottom:1px solid var(--line);color:var(--mute-2);}
 table.data th{font:700 .6875rem/1.4 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--mute);background:var(--ink-3);}
