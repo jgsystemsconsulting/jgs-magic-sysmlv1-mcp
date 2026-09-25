@@ -93,6 +93,8 @@ section { padding: var(--pad-section) 0; border-bottom: 1px solid var(--line); }
 .lead-in { color: var(--text); max-width: 64ch; }
 
 /* Hero */
+.hero-cols { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: clamp(28px, 4vw, 56px); align-items: center; }
+.hero-card { width: 100%; height: auto; display: block; border: 1px solid var(--line); border-radius: 6px; }
 .hero h1 { font-size: clamp(2rem, 5vw, 3.25rem); margin: 0 0 20px; line-height: 1.08; }
 .hero p.lede { font-size: clamp(1.05rem, 2vw, 1.25rem); color: var(--text); max-width: 60ch; margin: 0 0 32px; }
 .btns { display: flex; flex-wrap: wrap; gap: 14px; align-items: center; }
@@ -143,6 +145,7 @@ footer p { font-size: 0.85rem; color: var(--mute); }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } * { transition: none !important; } .btn:hover { transform: none; } }
 @media (max-width: 860px) {
   .grid.cols-2, .grid.cols-3 { grid-template-columns: 1fr; }
+  .hero-cols { grid-template-columns: 1fr; }
   .masthead .row .spacer { display: none; }
 }
 </style>
@@ -170,19 +173,27 @@ footer p { font-size: 0.85rem; color: var(--mute); }
 <main class="wrap" id="main-content">
 
   <section class="hero">
-    <p class="label">JG Systems Consulting Ltd. · CATIA Magic MCP</p>
-    <h1>Let your AI work on the SysML model it could never reach.</h1>
-    <p class="lede">
-      Your SysML v1 model lives inside CATIA Magic, and your AI assistant can't touch it. You
-      can't paste a 100,000-element model into a chat window, and you certainly can't send a
-      proprietary system design to the cloud. <strong>The JGS bridge brings the AI to the
-      model instead:</strong> it exposes your live project to Claude Code or any MCP agent over a
-      local, air-gapped connection, with 130+ tools to query, audit, and edit the real model in plain
-      English. Nothing leaves your machine.
-    </p>
-    <div class="btns">
-      <a class="btn primary" href="#install">Start free →</a>
-      <a class="btn ghost" href="https://github.com/jgsystemsconsulting/jgs-magic-sysmlv1-mcp">View on GitHub →</a>
+    <div class="hero-cols">
+      <div>
+        <p class="label">JG Systems Consulting Ltd. · CATIA Magic MCP</p>
+        <h1>Let your AI work on the SysML model it could never reach.</h1>
+        <p class="lede">
+          Your SysML v1 model lives inside CATIA Magic, and your AI assistant can't touch it. You
+          can't paste a 100,000-element model into a chat window, and you certainly can't send a
+          proprietary system design to the cloud. <strong>The JGS bridge brings the AI to the
+          model instead:</strong> it exposes your live project to Claude Code or any MCP agent over a
+          local, air-gapped connection, with 130+ tools to query, audit, and edit the real model in plain
+          English. Nothing leaves your machine.
+        </p>
+        <div class="btns">
+          <a class="btn primary" href="#install">Start free →</a>
+          <a class="btn ghost" href="https://github.com/jgsystemsconsulting/jgs-magic-sysmlv1-mcp">View on GitHub →</a>
+        </div>
+      </div>
+      <div>
+        <img class="hero-card" src="title-card.png" width="1280" height="720" loading="eager"
+             alt="Skill overview card for jgs-magic-sysmlv1-mcp: MCP bridge bringing live, air-gapped SysML v1 models in CATIA Magic to Claude Code and any MCP agent.">
+      </div>
     </div>
   </section>
 
