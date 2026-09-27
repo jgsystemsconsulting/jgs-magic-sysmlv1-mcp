@@ -4,3 +4,5 @@ __pycache__/
 .env
 .playwright-mcp/
 .ruff_cache/
+.superpowers/
+docs/superpowers/
